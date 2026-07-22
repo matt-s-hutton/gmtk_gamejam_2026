@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://nfowxy0mwlce"]
+
+[ext_resource type="Script" uid="uid://dnkql3gniyep6" path="res://src/level/level.gd" id="1_la7um"]
+
+[node name="Level" type="Node3D" unique_id=1835709079]
+script = ExtResource("1_la7um")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1709040829]
+use_collision = true
+size = Vector3(30, 0.01, 30)
