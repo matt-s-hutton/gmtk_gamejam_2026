@@ -14,9 +14,10 @@ var travel_distance: float = 10.0
 signal missed(arrow)
 
 func recolor(color: Color) -> void:
-	var new_material: Material = mesh.get_active_material(0).duplicate()
-	new_material.set("albedo_color", color)
-	mesh.set_surface_override_material(0, new_material)
+	if is_inside_tree(): # Ensure Scene is fully loaded
+		var new_material: Material = mesh.get_active_material(0).duplicate()
+		new_material.set("albedo_color", color)
+		mesh.set_surface_override_material(0, new_material)
 
 func setup(angle, direction, color, _target_beat: float, _lead_beats: float) -> void:
 	_direction = direction
