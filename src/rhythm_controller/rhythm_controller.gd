@@ -32,7 +32,7 @@ func _on_beat(current_beat: int) -> void:
 	var arrow: RhythmArrow = _ARROW_SCENE.instantiate()
 	add_child(arrow)
 	arrow.missed.connect(_on_arrow_missed)
-	
+
 
 	# hardcoded for now; later this comes from chart data
 	var target_beat := float(current_beat) + LEAD_BEATS
