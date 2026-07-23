@@ -5,12 +5,18 @@ class_name Enemy
 @export var stop_distance: float = 1.0
 @export var turn_speed: float = 5.0
 @export var max_knockback: float = 8.0
+@export var initial_health: int = 20
 
 @onready var _enemy_skin: EnemySkin = %EnemySkin
 
 var _player: Player
+var _health: int
 var _pathing := false
 var _knockback_velocity := Vector3.ZERO
+
+
+func _ready() -> void:
+	_health = initial_health
 
 
 func setup(p: Player, pos: Vector3) -> void:
@@ -20,7 +26,7 @@ func setup(p: Player, pos: Vector3) -> void:
 
 
 func _process(delta: float) -> void:
-	if not _pathing or _player == null:
+	if not _pathing or _player == null or is_queued_for_deletion():
 		return
 
 	# Decay knockback toward zero.
@@ -41,6 +47,21 @@ func _process(delta: float) -> void:
 	global_position += (move + _knockback_velocity) * delta
 
 
-func knockback(dir: Vector3, amount: float) -> void:
+func hit(dmg_amount: int, knockback_dir: Vector3, knockback_amount: float) -> void:
+	_damage(dmg_amount)
+	_knockback(knockback_dir, knockback_amount)
+
+
+func _damage(amount: int) -> void:
+	assert(amount > 0)
+	if amount <= 0 or _health <= 0:
+		return
+	_health = maxi(_health - amount, 0)
+	if _health == 0:
+		queue_free()
+	else:
+		_enemy_skin.flash()
+
+
+func _knockback(dir: Vector3, amount: float) -> void:
 	_knockback_velocity = (_knockback_velocity + dir * amount).limit_length(max_knockback)
-	_enemy_skin.flash()

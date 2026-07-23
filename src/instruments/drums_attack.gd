@@ -3,6 +3,8 @@ class_name DrumsAttack
 
 @export var attack_radius := 7.0
 @export var radius_expansion_rate := 18.0
+@export var knockback := 3.0
+@export var damage: int = 8
 
 @onready var _attack_mesh: MeshInstance3D = %MeshInstance3D
 @onready var _attack_collision_shape: CollisionShape3D = %CollisionShape3D
@@ -32,4 +34,4 @@ func _process(delta: float) -> void:
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area is EnemyHurtBox:
 		var enemy: Enemy = area.enemy
-		enemy.knockback(global_position.direction_to(enemy.global_position), 3.0)
+		enemy.hit(damage, global_position.direction_to(enemy.global_position), knockback)
