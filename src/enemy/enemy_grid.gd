@@ -12,6 +12,8 @@ func _physics_process(_delta: float) -> void:
 	for enemy in enemy_manager.active:
 		insert(enemy)
 
+func get_cells(coords):
+	return _cells[coords]
 
 func _key(pos: Vector3) -> Vector2i:
 	return Vector2i(
@@ -31,11 +33,11 @@ func insert(enemy: Enemy) -> void:
 	_cells[k].append(enemy)
 
 
-func get_neighbors(pos: Vector3, out: Array) -> void:
+func get_neighbors(pos: Vector3, out: Array, radius: int = 1) -> void:
 	out.clear()
 	var base := _key(pos)
-	for dx in range(-1, 2):
-		for dz in range(-1, 2):
+	for dx in range(-radius, radius + 1):
+		for dz in range(-radius, radius + 1):
 			var k := base + Vector2i(dx, dz)
 			if _cells.has(k):
 				out.append_array(_cells[k])
