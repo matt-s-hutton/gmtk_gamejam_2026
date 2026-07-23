@@ -2,6 +2,7 @@ extends Node3D
 class_name EnemySpawner
 
 @export var player: Player
+@export var enemy_grid: EnemyGrid
 
 const _ENEMY_SCENE: PackedScene = preload("res://src/enemy/enemy.tscn")
 
@@ -12,5 +13,5 @@ func _ready() -> void:
 
 func _on_spawn_enemy(pos: Vector3) -> void:
 	var enemy: Enemy = _ENEMY_SCENE.instantiate()
-	add_sibling(enemy)
+	enemy_grid.add_child(enemy)
 	enemy.setup(player, pos)
