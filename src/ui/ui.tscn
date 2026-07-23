@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://b7dwt6s6pe4e4"]
+
+[ext_resource type="Script" uid="uid://bk7a3pchvmqvo" path="res://src/ui/ui.gd" id="1_sp1ie"]
+[ext_resource type="LabelSettings" uid="uid://ynv1r8sthpnh" path="res://src/ui/hud_label_settings.tres" id="2_jlntk"]
+
+[node name="UI" type="Control" unique_id=1757368918]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_sp1ie")
+
+[node name="HUD" type="Control" parent="." unique_id=1419874616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD" unique_id=1447140924]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -94.0
+offset_right = 41.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 27
+
+[node name="Health" type="Label" parent="HUD/VBoxContainer" unique_id=1119946746]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("2_jlntk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="HUD/VBoxContainer" unique_id=1170686866]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "01:30"
+label_settings = ExtResource("2_jlntk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="Control" parent="." unique_id=1863865956]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=688359175]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.19215687)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver" unique_id=1587825480]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -72.0
+offset_right = 130.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer" unique_id=1463554445]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOver/VBoxContainer" unique_id=229587695]
+process_mode = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[connection signal="pressed" from="GameOver/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

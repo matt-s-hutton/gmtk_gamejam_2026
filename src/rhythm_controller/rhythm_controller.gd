@@ -3,8 +3,8 @@ extends Node3D
 const _ARROW_SCENE: PackedScene = preload("res://src/rhythm_controller/rhythm_arrow.tscn")
 const HIT_WINDOW_BEATS: float = 0.3   # ±0.2 beats; tune to taste
 const LEAD_BEATS: float = 2.0         # arrow visible for 2 beats before its hit
-var controler_damage: float = -10
-var heal_value: float = 10
+var controler_damage := -10
+var heal_value := 10
 @export var player: Player
 
 var arrow_setup: Dictionary = {
@@ -26,7 +26,7 @@ func _on_beat(current_beat: int) -> void:
 	var arrow: RhythmArrow = _ARROW_SCENE.instantiate()
 	add_child(arrow)
 	arrow.missed.connect(_on_arrow_missed)
-	
+
 
 	# hardcoded for now; later this comes from chart data
 	var target_beat := float(current_beat) + LEAD_BEATS
@@ -54,7 +54,7 @@ func _try_hit_arrow(direction: Vector3) -> void:
 		var signed_delta := now - best_arrow.target_beat  # <0 early, >0 late
 		best_arrow.queue_free()
 		player.hp_controller(heal_value)
-		print("success (%.3f beats off)" % signed_delta)	
+		print("success (%.3f beats off)" % signed_delta)
 		# scoring/grading logic goes here
 	else:
 		player.hp_controller(controler_damage)
