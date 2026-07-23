@@ -18,8 +18,9 @@ radius = 3.0
 [node name="Player" type="CharacterBody3D" unique_id=634563065]
 script = ExtResource("1_4anbu")
 
-[node name="RhythmController" parent="." unique_id=967955007 instance=ExtResource("2_mf2ua")]
+[node name="RhythmController" parent="." unique_id=967955007 node_paths=PackedStringArray("player") instance=ExtResource("2_mf2ua")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+player = NodePath("..")
 
 [node name="Drums" parent="." unique_id=838168437 node_paths=PackedStringArray("player") instance=ExtResource("2_rxibo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4798341, 0.47058564, 1.179371)
