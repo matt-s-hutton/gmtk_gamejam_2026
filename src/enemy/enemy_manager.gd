@@ -39,7 +39,6 @@ func _on_deactivate_enemy(e: Enemy) -> void:
 
 
 func _on_enemy_tree_exiting(enemy: Enemy) -> void:
-	assert(false, "Enemy left tree unexpectedly: %s" % enemy.name)
 	while _inactive.has(enemy):
 		_inactive.erase(enemy)
 	while active.has(enemy):
