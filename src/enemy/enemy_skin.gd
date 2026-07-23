@@ -1,8 +1,6 @@
 extends MeshInstance3D
 class_name EnemySkin
 
-@export var rotation_speed: float = 1.0
-@export var spin_speed: float = 2.0
 @export var flash_decay: float = 5.0
 
 var _flash_material: ShaderMaterial
@@ -29,11 +27,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var rand_offset = randf()
-	rotate_x((1 + rand_offset) * delta)
-	rotate_z((1 + rand_offset) * delta)
-	rotate_y((2 + rand_offset) * delta)
-
 	if _flash > 0.0:
 		_flash = max(_flash - flash_decay * delta, 0.0)
 		_flash_material.set_shader_parameter("flash", _flash)
@@ -42,7 +35,3 @@ func _process(delta: float) -> void:
 func flash() -> void:
 	_flash = 1.0
 	_flash_material.set_shader_parameter("flash", _flash)
-
-
-func _on_orthnormalise_timer_timeout() -> void:
-	basis = basis.orthonormalized()

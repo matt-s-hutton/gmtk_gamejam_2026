@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Conductor="*uid://c5rvmkaorxynb"
 EnemyService="*uid://boyp83mtca23n"
+Conductor="*uid://c5rvmkaorxynb"
 
 [display]
 
