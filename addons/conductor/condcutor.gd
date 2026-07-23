@@ -5,6 +5,9 @@ var bpm : float = 120
 var beats_per_measure : int = 4
 var first_beat_offset : float = 0
 
+var _prev_raw_beat: float = 0.0
+var loop_offset: float = 0.0
+
 # Tracking the beat and song position
 var song_position:float = 0.0
 var current_beat:float = 0
@@ -26,17 +29,19 @@ func set_song(_stream:AudioStream, _bpm:float, _beats_per_measure:int = 4, _firs
 		stream=_stream
 		bpm=_bpm
 		beats_per_measure=_beats_per_measure
-		
+
 		sec_per_beat=60.0/bpm
 		beat_per_sec=bpm/60.0
-		
+
 		last_reported_beat = -1
 		last_reported_update = 0
 		last_reported_measure = -1
-		
+
 		song_position=0
 		current_beat=0
-		
+		_prev_raw_beat = 0.0
+		loop_offset = 0.0
+
 		first_beat_offset = _first_beat_offset
 
 func play_song_from_beat(beat:float):
@@ -59,7 +64,14 @@ func _physics_process(delta: float) -> void:
 	if (playing):
 		song_position = get_playback_position() + AudioServer.get_time_since_last_mix() + first_beat_offset
 		song_position -= AudioServer.get_output_latency()
-		current_beat = song_position / sec_per_beat
+
+		var raw_beat: float = song_position / sec_per_beat
+		# The playback position jumped backward → the stream looped.
+		if raw_beat < _prev_raw_beat - 1.0:
+			loop_offset += stream.get_length() / sec_per_beat
+		_prev_raw_beat = raw_beat
+
+		current_beat = raw_beat + loop_offset
 		_report_beat()
 		_report_update()
 	elif (is_playing_offset):
@@ -73,16 +85,16 @@ func _physics_process(delta: float) -> void:
 func _report_beat():
 	if last_reported_beat < floori(current_beat):
 		last_reported_beat = floori(current_beat)
-		
+
 		beat.emit(floori(current_beat))
-		#print("emitting beat: " + str(floori(current_beat)))
-		
+		# print("emitting beat: " + str(floori(current_beat)))
+
 		_report_measure()
 
 func _report_measure():
 	if(floori(current_beat)%beats_per_measure == 0):
 		current_measure = floori(current_beat)/beats_per_measure
-	
+
 	if(last_reported_measure < current_measure):
 		last_reported_measure = current_measure
 		measure.emit(current_measure)
