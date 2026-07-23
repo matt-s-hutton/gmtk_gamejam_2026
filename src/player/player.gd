@@ -2,14 +2,14 @@ extends CharacterBody3D
 class_name Player
 
 @export var max_speed := 8.0
-@export var max_hp := 100.0
-@export var damage_value = -20
+@export var max_hp := 100
+@export var damage_value := -20
 
 @onready var attack_emission_point: Marker3D = %AttackEmissionPoint
 
 var can_damage: bool = true
 var cooldown:float = 1.0
-var hp: float
+var hp: int
 var hp_counter: float = 1.0
 
 var dir := Vector3.ZERO
@@ -28,10 +28,9 @@ func _physics_process(_delta: float) -> void:
 	velocity.z = dir.z * max_speed
 	move_and_slide()
 
-func hp_controller(value):
-	hp += value
-	if hp > max_hp:
-		hp = max_hp
+func hp_controller(value: int):
+	hp = mini(hp + value, max_hp)
+	UiService.request_update_health_label(str(hp))
 	if hp <= 0:
 		die()
 	return
