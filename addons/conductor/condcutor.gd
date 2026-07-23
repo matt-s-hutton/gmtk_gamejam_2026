@@ -104,3 +104,14 @@ func _report_update():
 	update.emit(current_beat-last_reported_update, current_beat, current_measure)
 	#print("emitting update")
 	last_reported_update = current_beat
+
+func reset_tracking() -> void:
+	last_reported_beat = -1
+	last_reported_measure = -1
+	last_reported_update = 0
+	current_measure = 0
+	current_beat = 0
+	song_position = 0
+	_prev_raw_beat = 0.0
+	loop_offset = 0.0
+	is_playing_offset = false
