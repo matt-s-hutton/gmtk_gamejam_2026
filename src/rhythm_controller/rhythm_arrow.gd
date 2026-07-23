@@ -3,6 +3,8 @@ class_name RhythmArrow
 
 var _direction: Vector3
 var _speed: float
+var spawn_frame: int = 0
+var peak_frame: int = 0
 
 @export var enabled: bool = false
 @export var total_beats: int = 0
@@ -14,10 +16,11 @@ func recolor(color: Color) -> void:
 	new_material.set("albedo_color", color)
 	set_surface_override_material(0, new_material)
 
-func setup(angle, direction, color, speed) -> void:
+func setup(angle, direction, color, speed, spawn_frame, peak_frame) -> void:
 	_direction = direction
 	_speed = speed
-	
+	self.spawn_frame = spawn_frame
+	self.peak_frame = peak_frame
 	enabled = true
 	
 	rotate(Vector3.UP, deg_to_rad(angle))
