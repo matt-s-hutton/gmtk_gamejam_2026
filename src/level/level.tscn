@@ -57,4 +57,5 @@ player = NodePath("../Player")
 [node name="Ground" type="Node3D" parent="." unique_id=1067353544]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1790423482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94663143, 0.047156334, -6.830467)
 mesh = SubResource("PlaneMesh_7vdnf")
