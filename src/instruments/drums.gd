@@ -10,5 +10,5 @@ const _DRUMS_ATTACK_SCENE: PackedScene = preload("res://src/instruments/drums_at
 func _on_attack_timer_timeout() -> void:
 	var drums_attack: DrumsAttack = _DRUMS_ATTACK_SCENE.instantiate()
 	player.add_sibling(drums_attack)
-	drums_attack.global_position = player.global_position
-	drums_attack.setup(player)
+	drums_attack.global_position = player.attack_emission_point.global_position
+	drums_attack.setup(player.attack_emission_point)

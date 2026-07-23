@@ -2,7 +2,6 @@ extends MeshInstance3D
 class_name RhythmArrow
 
 const HIT_WINDOW_BEATS: float = 0.2   # keep in sync with the controller (shared constant/autoload ideally)
-
 var _direction: Vector3
 var target_beat: float = 0.0      # the beat this arrow must be hit on
 var lead_beats: float = 2.0       # how many beats it travels from spawn to ring
@@ -36,5 +35,5 @@ func _process(_delta: float) -> void:
 	# passed the hit window unhit → miss, remove so it can't shadow later arrows
 	if Conductor.current_beat > target_beat + HIT_WINDOW_BEATS:
 		enabled = false
-		missed.emit(self)
+		missed.emit()
 		queue_free()

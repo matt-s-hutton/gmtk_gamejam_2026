@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blsuamakt2c6r" path="res://src/instruments/lead.tscn" id="2_5f2sf"]
 [ext_resource type="PackedScene" uid="uid://clrunh4xhdcah" path="res://src/rhythm_controller/rhythm_controller.tscn" id="2_mf2ua"]
 [ext_resource type="PackedScene" uid="uid://dxmiecia6xxmj" path="res://src/instruments/drums.tscn" id="2_rxibo"]
+[ext_resource type="PackedScene" uid="uid://ygjri5ooge1u" path="res://src/instruments/bass.tscn" id="4_5f2sf"]
 [ext_resource type="PackedScene" uid="uid://dint5seyqovnn" path="res://game_over.tscn" id="4_244u8"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_gvfn3"]
@@ -18,14 +19,22 @@ radius = 3.0
 [node name="Player" type="CharacterBody3D" unique_id=634563065]
 script = ExtResource("1_4anbu")
 
+
 [node name="Lead" parent="." unique_id=838168437 node_paths=PackedStringArray("player") instance=ExtResource("2_5f2sf")]
 player = NodePath("..")
 
-[node name="RhythmController" parent="." unique_id=967955007 instance=ExtResource("2_mf2ua")]
+
+[node name="RhythmController" parent="." unique_id=967955007 node_paths=PackedStringArray("player") instance=ExtResource("2_mf2ua")]
+
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+player = NodePath("..")
 
 [node name="Drums" parent="." unique_id=839120689 node_paths=PackedStringArray("player") instance=ExtResource("2_rxibo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4798341, 0.47058564, 1.179371)
+player = NodePath("..")
+
+[node name="Bass" parent="." unique_id=1120892320 node_paths=PackedStringArray("player") instance=ExtResource("4_5f2sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8548074, 0.478992, 0)
 player = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1421842133]
@@ -49,5 +58,9 @@ shape = SubResource("CylinderShape3D_fvpvq")
 [node name="game_over" parent="." unique_id=1581194896 instance=ExtResource("4_244u8")]
 transform = Transform3D(1, 0, 0, 0, 0.99854016, 0.05401501, 0, -0.05401501, 0.99854016, 0, 5.4842415, 2.8760161)
 visible = false
+
+[node name="AttackEmissionPoint" type="Marker3D" parent="." unique_id=1905329643]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25441682, 0)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
