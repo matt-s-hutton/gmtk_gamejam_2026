@@ -37,9 +37,7 @@ func hp_controller(value: int):
 
 
 func die() -> void:
-	$game_over.show()
-	$game_over/CanvasLayer.show()
-	get_tree().paused = true
+	UiService.request_game_over()
 
 
 func _on_hitbox_area_entered(area: Area3D) -> void:
