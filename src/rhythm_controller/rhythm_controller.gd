@@ -3,8 +3,8 @@ extends Node3D
 const _ARROW_SCENE: PackedScene = preload("res://src/rhythm_controller/rhythm_arrow.tscn")
 const HIT_WINDOW_BEATS: float = 0.3 # ±0.2 beats; tune to taste
 const LEAD_BEATS: float = 2.0 # arrow visible for 2 beats before its hit
-var controler_damage: float = -10
-var heal_value: float = 10
+var controler_damage: int = -10
+var heal_value: int = 10
 @export var player: Player
 
 var arrow_setup: Dictionary = {
