@@ -1,10 +1,60 @@
 [gd_scene format=3 uid="uid://nfowxy0mwlce"]
 
 [ext_resource type="Script" uid="uid://dnkql3gniyep6" path="res://src/level/level.gd" id="1_la7um"]
+[ext_resource type="PackedScene" uid="uid://dl33lb1weggm6" path="res://src/enemy/enemy_spawner.tscn" id="2_p6v4a"]
+[ext_resource type="PackedScene" uid="uid://c5b5wcgvt5esd" path="res://src/player/player.tscn" id="2_xv147"]
+[ext_resource type="Texture2D" uid="uid://fgeikggwjnqb" path="res://assets/level/Sand_01_basecolor.png" id="3_af42n"]
+[ext_resource type="Texture2D" uid="uid://dn5tql2t41gcg" path="res://assets/level/Sand_01_ambientocclusion.png" id="3_em31m"]
+[ext_resource type="Texture2D" uid="uid://ds2661np8owge" path="res://assets/level/Sand_01_normal.png" id="4_w7y1s"]
+[ext_resource type="Texture2D" uid="uid://c0uo68gpiiv1a" path="res://assets/level/Sand_01_roughness.png" id="5_5vox1"]
+[ext_resource type="Texture2D" uid="uid://c67nv2kbx4je6" path="res://assets/level/Sand_01_height.png" id="5_ob0n7"]
+[ext_resource type="Texture2D" uid="uid://wojldtdk42dw" path="res://assets/level/Sand_01_metallic.png" id="6_p6v4a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mpbj7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_em31m"]
+sky_material = SubResource("ProceduralSkyMaterial_mpbj7")
+
+[sub_resource type="Environment" id="Environment_w7y1s"]
+background_mode = 2
+sky = SubResource("Sky_em31m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvfn3"]
+albedo_color = Color(0.7708395, 0.77083945, 0.7708394, 1)
+albedo_texture = ExtResource("3_af42n")
+metallic_texture = ExtResource("6_p6v4a")
+roughness_texture = ExtResource("5_5vox1")
+normal_enabled = true
+normal_texture = ExtResource("4_w7y1s")
+ao_enabled = true
+ao_texture = ExtResource("3_em31m")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_ob0n7")
+uv1_scale = Vector3(50, 50, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7vdnf"]
+material = SubResource("StandardMaterial3D_gvfn3")
+size = Vector2(100, 100)
 
 [node name="Level" type="Node3D" unique_id=1835709079]
 script = ExtResource("1_la7um")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1709040829]
-use_collision = true
-size = Vector3(30, 0.01, 30)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1031514596]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=615882955]
+environment = SubResource("Environment_w7y1s")
+
+[node name="EnemySpawner" parent="." unique_id=1342869898 node_paths=PackedStringArray("player") instance=ExtResource("2_p6v4a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.350028, 0)
+player = NodePath("../Player")
+
+[node name="Player" parent="." unique_id=634563065 instance=ExtResource("2_xv147")]
+
+[node name="Ground" type="Node3D" parent="." unique_id=1067353544]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1790423482]
+mesh = SubResource("PlaneMesh_7vdnf")

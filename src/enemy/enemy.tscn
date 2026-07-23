@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cn571weqaxina"]
+
+[ext_resource type="Script" uid="uid://chxdvw1a1sbby" path="res://src/enemy/enemy.gd" id="1_6j2al"]
+[ext_resource type="Script" uid="uid://cjpgfby3lf13v" path="res://src/enemy/enemy_hurt_box.gd" id="2_ig63i"]
+[ext_resource type="Script" uid="uid://bqnp2estqu4bo" path="res://src/enemy/enemy_skin.gd" id="2_xso4u"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7vdnf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7vdnf"]
+
+[node name="Enemy" type="Node3D" unique_id=563102616]
+script = ExtResource("1_6j2al")
+
+[node name="EnemySkin" type="MeshInstance3D" parent="." unique_id=21529653]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_7vdnf")
+script = ExtResource("2_xso4u")
+
+[node name="EnemyHurtBox" type="Area3D" parent="." unique_id=866595033 node_paths=PackedStringArray("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_ig63i")
+enemy = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtBox" unique_id=1380480945]
+shape = SubResource("SphereShape3D_7vdnf")
