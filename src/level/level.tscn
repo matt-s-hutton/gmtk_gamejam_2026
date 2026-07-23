@@ -68,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.350028, 0)
 player = NodePath("../Player")
 enemy_grid = NodePath("../EnemyGrid")
 
-[node name="EnemyGrid" parent="." unique_id=1072609493 node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_5suky")]
+[node name="EnemyGrid" parent="." unique_id=1072609493 node_paths=PackedStringArray("enemy_manager") groups=["enemy_grid"] instance=ExtResource("3_5suky")]
 cell_size = 2.0
 enemy_manager = NodePath("../EnemyManager")
 
