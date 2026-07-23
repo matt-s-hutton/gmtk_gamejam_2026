@@ -12,8 +12,6 @@ func _physics_process(_delta: float) -> void:
 	for enemy in enemy_manager.active:
 		insert(enemy)
 
-func get_cells(coords):
-	return _cells[coords]
 
 func _key(pos: Vector3) -> Vector2i:
 	return Vector2i(
