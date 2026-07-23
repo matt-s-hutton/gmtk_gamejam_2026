@@ -1,3 +1,36 @@
 [gd_scene format=3 uid="uid://bp38u0epjmx66"]
 
+[ext_resource type="Script" uid="uid://brfyw23gkygwq" path="res://src/instruments/bass_attack.gd" id="1_w1suj"]
+[ext_resource type="Shader" uid="uid://k1d5wx4wdxe4" path="res://src/instruments/bass_attack.gdshader" id="2_sbpkd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvfn3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_sbpkd")
+shader_parameter/fxColor = Color(0.4, 0.8, 1, 1)
+shader_parameter/progress = 0.0
+shader_parameter/width = 0.0
+shader_parameter/angle = 45.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7vdnf"]
+size = Vector2(30, 30)
+
 [node name="BassAttack" type="Node3D" unique_id=296969928]
+script = ExtResource("1_w1suj")
+progress_easing = 0.12074202
+width_out_easing = 2.297397
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1370457104]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_gvfn3")
+mesh = SubResource("PlaneMesh_7vdnf")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1666934554]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D" unique_id=1675618812]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+polygon = PackedVector2Array(0, 0, 6.5, -15, -6.5, -15)
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
