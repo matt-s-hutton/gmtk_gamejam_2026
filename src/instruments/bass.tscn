@@ -2,5 +2,22 @@
 
 [ext_resource type="Script" uid="uid://dinsur66lnnbx" path="res://src/instruments/bass.gd" id="1_mgec5"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvfn3"]
+albedo_color = Color(0, 0.5686275, 0.28235295, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7vdnf"]
+material = SubResource("StandardMaterial3D_gvfn3")
+height = 0.5
+
 [node name="Bass" type="Node3D" unique_id=1120892320]
 script = ExtResource("1_mgec5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1231198419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_7vdnf")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=401995743]
+wait_time = 0.8
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
