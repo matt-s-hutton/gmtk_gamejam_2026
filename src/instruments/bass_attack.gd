@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 	if _timer < width_center_time:
 		width = ease(_timer / width_center_time, width_in_easing) * width_scale
 	else:
-		width = 1.0 - ease((_timer - width_center_time) / width_center_time, width_out_easing) * width_scale
+			width = 1.0 - ease((_timer - width_center_time) / (lifetime - width_center_time), width_out_easing) * width_scale
 	_mat.set_shader_parameter("width", clamp(width, 0.0, 1.0))
 
 	if _timer >= lifetime:
