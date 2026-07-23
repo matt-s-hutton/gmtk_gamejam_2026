@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dxmiecia6xxmj"]
+
+[ext_resource type="Script" uid="uid://d0epftobckwwj" path="res://src/instruments/drums.gd" id="1_4ow1o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvfn3"]
+albedo_color = Color(1, 0.42352942, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7vdnf"]
+material = SubResource("StandardMaterial3D_gvfn3")
+height = 0.5
+
+[node name="Drums" type="Node3D" unique_id=838168437]
+script = ExtResource("1_4ow1o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1500814906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24983269, 0)
+mesh = SubResource("CylinderMesh_7vdnf")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=565750425]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
