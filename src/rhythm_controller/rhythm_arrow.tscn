@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://6m1tphq5kgax"]
+
+[ext_resource type="Script" uid="uid://bee5hu2e0ytm0" path="res://src/rhythm_controller/rhythm_arrow.gd" id="2_isqjl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q7ts2"]
+load_path = "res://.godot/imported/arrow.png-04776f1b14f1c06e2a2dc7988e6d9f7a.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isqjl"]
+transparency = 1
+albedo_texture = SubResource("CompressedTexture2D_q7ts2")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gtnxy"]
+material = SubResource("StandardMaterial3D_isqjl")
+size = Vector2(4, 4)
+
+[node name="RhythmArrow" type="MeshInstance3D" unique_id=1957889740]
+mesh = SubResource("PlaneMesh_gtnxy")
+script = ExtResource("2_isqjl")

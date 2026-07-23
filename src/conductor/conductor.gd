@@ -5,6 +5,6 @@ extends Node
 
 func _ready() -> void:
 	if (current_song):
-		Conductor.set_song(current_song, 120, 4)
+		Conductor.set_song(current_song, 75, 4)
 		Conductor.volume_db = -14
 		Conductor.play()

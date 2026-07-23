@@ -28,6 +28,7 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/conductor/plugin.cfg")
+
 [input]
 
 move_up={

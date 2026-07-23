@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5b5wcgvt5esd"]
 
 [ext_resource type="Script" uid="uid://c6fyx24v4r5tg" path="res://src/player/player.gd" id="1_4anbu"]
+[ext_resource type="PackedScene" uid="uid://clrunh4xhdcah" path="res://src/rhythm_controller/rhythm_controller.tscn" id="2_mf2ua"]
 [ext_resource type="PackedScene" uid="uid://dxmiecia6xxmj" path="res://src/instruments/drums.tscn" id="2_rxibo"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_gvfn3"]
@@ -15,6 +16,9 @@ radius = 3.0
 [node name="Player" type="CharacterBody3D" unique_id=634563065]
 script = ExtResource("1_4anbu")
 
+[node name="RhythmController" parent="." unique_id=967955007 instance=ExtResource("2_mf2ua")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
 [node name="Drums" parent="." unique_id=838168437 node_paths=PackedStringArray("player") instance=ExtResource("2_rxibo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4798341, 0.47058564, 1.179371)
 player = NodePath("..")
@@ -28,4 +32,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CylinderShape3D_fvpvq")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=80034984]
-transform = Transform3D(1, 0, 0, 0, 0.39874908, 0.91706, 0, -0.9170601, 0.39874905, 0, 15.33, 6.815)
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 18, 6)
