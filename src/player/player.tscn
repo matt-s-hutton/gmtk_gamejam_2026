@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://clrunh4xhdcah" path="res://src/rhythm_controller/rhythm_controller.tscn" id="2_mf2ua"]
 [ext_resource type="PackedScene" uid="uid://dxmiecia6xxmj" path="res://src/instruments/drums.tscn" id="2_rxibo"]
 [ext_resource type="PackedScene" uid="uid://ygjri5ooge1u" path="res://src/instruments/bass.tscn" id="4_5f2sf"]
-[ext_resource type="PackedScene" uid="uid://dint5seyqovnn" path="res://game_over.tscn" id="4_244u8"]
 [ext_resource type="PackedScene" uid="uid://b7dwt6s6pe4e4" path="res://src/ui/ui.tscn" id="6_jiejy"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_gvfn3"]
@@ -48,10 +47,6 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=432024452]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CylinderShape3D_fvpvq")
-
-[node name="game_over" parent="." unique_id=1581194896 instance=ExtResource("4_244u8")]
-transform = Transform3D(1, 0, 0, 0, 0.99854016, 0.05401501, 0, -0.05401501, 0.99854016, 0, 5.4842415, 2.8760161)
-visible = false
 
 [node name="AttackEmissionPoint" type="Marker3D" parent="." unique_id=1905329643]
 unique_name_in_owner = true
