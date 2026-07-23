@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ygjri5ooge1u"]
+
+[ext_resource type="Script" uid="uid://dinsur66lnnbx" path="res://src/instruments/bass.gd" id="1_mgec5"]
+
+[node name="Bass" type="Node3D" unique_id=1120892320]
+script = ExtResource("1_mgec5")
