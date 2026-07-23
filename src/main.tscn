@@ -1,13 +1,6 @@
 [gd_scene format=3 uid="uid://kph73bncyhhu"]
 
 [ext_resource type="Script" uid="uid://csji8v7y3nwn5" path="res://src/main.gd" id="1_eewff"]
-[ext_resource type="PackedScene" uid="uid://b23aoof5ovirx" path="res://src/conductor/conductor.tscn" id="2_gh0ne"]
-[ext_resource type="Script" uid="uid://dyugjuolk07hl" path="res://src/conductor/conductor.gd" id="3_5q4o7"]
-[ext_resource type="AudioStream" uid="uid://cfs2l5tt8ujjr" path="res://assets/audio/music/Jam Theme1.wav" id="4_3cfgd"]
 
 [node name="Main" type="Node3D" unique_id=1658285055]
 script = ExtResource("1_eewff")
-
-[node name="Conductor" parent="." unique_id=212461948 instance=ExtResource("2_gh0ne")]
-script = ExtResource("3_5q4o7")
-current_song = ExtResource("4_3cfgd")

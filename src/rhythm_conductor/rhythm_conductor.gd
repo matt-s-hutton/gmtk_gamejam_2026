@@ -1,4 +1,5 @@
 extends Node
+clas
 
 @export var current_song: AudioStream
 
