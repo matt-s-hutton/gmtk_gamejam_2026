@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://clrunh4xhdcah"]
+
+[ext_resource type="Script" uid="uid://23x8e60he8so" path="res://src/rhythm_controller/rhythm_controller.gd" id="1_tuyyq"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_pprnm"]
+inner_radius = 10.5
+outer_radius = 11.0
+
+[node name="RhythmController" type="Node3D" unique_id=967955007]
+script = ExtResource("1_tuyyq")
+
+[node name="Ring" type="MeshInstance3D" parent="." unique_id=263846802]
+mesh = SubResource("TorusMesh_pprnm")
