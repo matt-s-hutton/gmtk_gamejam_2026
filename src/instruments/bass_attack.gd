@@ -38,7 +38,7 @@ func setup(e: Node3D, dir: Vector3) -> void:
 	_emitter = e
 	_dir = dir
 	global_position = _emitter.global_position
-	rotation.y = atan2(_dir.x, _dir.z)
+	global_rotation.y = atan2(_dir.x, _dir.z)
 	_timer = 0.0
 	_playing = true
 

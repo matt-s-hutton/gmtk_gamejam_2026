@@ -13,7 +13,7 @@ var _target: Node3D
 func _ready() -> void:
 	set_physics_process(false)
 
-func setup(_player: Player, pos: Vector3, enemy_grid: EnemyGrid, target: Node3D) -> void:
+func setup(pos: Vector3, enemy_grid: EnemyGrid, target: Node3D) -> void:
 	global_position = pos
 	_enemy_grid = enemy_grid
 	_target = target
@@ -33,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(_target):
 		velocity = Vector3.ZERO
 		return
-		
+
 	var desired_direction := global_position.direction_to(
 		_target.global_position
 	)
