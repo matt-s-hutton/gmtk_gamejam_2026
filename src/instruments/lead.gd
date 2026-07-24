@@ -8,15 +8,15 @@ const _LEAD_ATTACK_SCENE: PackedScene = preload("res://src/instruments/lead_atta
 
 func _ready() -> void:
 	_enemy_grid = get_tree().get_first_node_in_group("enemy_grid") as EnemyGrid
-	
+
 func _on_atack_timer_timeout() -> void:
 	var target = get_nearest_enemy_from_grid(player.global_position, search_radius)
 	if not is_instance_valid(target):
 		return
 	var lead_attack: LeadAttack = _LEAD_ATTACK_SCENE.instantiate()
 	player.add_sibling(lead_attack)
-	lead_attack.global_position = player.global_position
-	lead_attack.setup(player, player.global_position, _enemy_grid, target)
+	lead_attack.global_position = player.attack_emission_point.global_position
+	lead_attack.setup(player.attack_emission_point.global_position, _enemy_grid, target)
 
 func get_nearest_enemy_from_grid(
 	pos: Vector3,

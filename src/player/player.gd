@@ -6,6 +6,7 @@ class_name Player
 @export var damage_value := -20
 
 @onready var attack_emission_point: Marker3D = %AttackEmissionPoint
+@onready var player_skin: Node3D = %PlayerSkin
 
 var can_damage: bool = true
 var cooldown:float = 1.0
@@ -18,15 +19,19 @@ var facing_dir := Vector3.ZERO
 
 func _ready() -> void:
 	hp = max_hp
+	UiService.request_update_health_label(str(hp))
+
 
 func _physics_process(_delta: float) -> void:
 	var input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	dir = Vector3(input.x, 0.0, input.y)
 	if dir != Vector3.ZERO:
 		facing_dir = dir
+		player_skin.look_at(global_position + facing_dir, Vector3.UP)
 	velocity.x = dir.x * max_speed
 	velocity.z = dir.z * max_speed
 	move_and_slide()
+
 
 func hp_controller(value: int):
 	hp = mini(hp + value, max_hp)

@@ -2,8 +2,30 @@
 
 [ext_resource type="Script" uid="uid://bk7a3pchvmqvo" path="res://src/ui/ui.gd" id="1_sp1ie"]
 [ext_resource type="LabelSettings" uid="uid://ynv1r8sthpnh" path="res://src/ui/hud_label_settings.tres" id="2_jlntk"]
-[ext_resource type="Texture2D" uid="uid://sg4ymikstcj2" path="res://src/ui/victory_screen.png" id="3_qemve"]
-[ext_resource type="AudioStream" uid="uid://cxa4o32j0addi" path="res://src/ui/Victory Fanfare.wav" id="4_8wxmc"]
+[ext_resource type="Texture2D" uid="uid://sg4ymikstcj2" path="res://src/ui/victory_screen.png" id="3_victory"]
+[ext_resource type="AudioStream" uid="uid://cxa4o32j0addi" path="res://src/ui/Victory Fanfare.wav" id="4_fanfar"]
+[ext_resource type="AudioStream" uid="uid://dxd1qts1ostpq" path="res://assets/audio/sfx/Game Over.wav" id="5_game_over"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qemve"]
+bg_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjdex"]
+bg_color = Color(0.6255971, 0.6255971, 0.62559694, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wxmc"]
+bg_color = Color(0.7624039, 0.76240367, 0.76240325, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="UI" type="Control" unique_id=1757368918 node_paths=PackedStringArray("fanfar")]
 process_mode = 3
@@ -59,7 +81,6 @@ vertical_alignment = 1
 
 [node name="GameOver" type="Control" parent="." unique_id=1863865956]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,6 +90,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=688359175]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,7 +98,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.19215687)
+color = Color(8.4228816e-08, 0.0013577301, 0.05071696, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOver" unique_id=1587825480]
 layout_mode = 1
@@ -94,19 +116,34 @@ grow_vertical = 2
 theme_override_constants/separation = 24
 
 [node name="Label" type="Label" parent="GameOver/VBoxContainer" unique_id=1463554445]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Game Over"
+text = "It's Curtains For You!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RestartButton" type="Button" parent="GameOver/VBoxContainer" unique_id=229587695]
-process_mode = 2
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.13725491, 0.13725491, 0.13725491, 1)
+theme_override_colors/font_hover_color = Color(0.13682568, 0.13682568, 0.1368261, 1)
 theme_override_font_sizes/font_size = 32
-text = "Restart"
+theme_override_styles/normal = SubResource("StyleBoxFlat_qemve")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sjdex")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8wxmc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_sjdex")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sjdex")
+text = "Encore"
+
+[node name="GameOverStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=909219093]
+unique_name_in_owner = true
+process_mode = 2
+stream = ExtResource("5_game_over")
 
 [node name="Victory" type="Control" parent="." unique_id=511192001]
 process_mode = 3
@@ -118,7 +155,7 @@ offset_bottom = 40.0
 [node name="Sprite2D" type="Sprite2D" parent="Victory" unique_id=378707561]
 position = Vector2(577.0257, 323.5)
 scale = Vector2(1.8371428, 1.8371428)
-texture = ExtResource("3_qemve")
+texture = ExtResource("3_victory")
 
 [node name="RestartButton" type="Button" parent="Victory" unique_id=602091249]
 process_mode = 2
@@ -145,7 +182,7 @@ theme_override_font_sizes/font_size = 32
 text = "Next Level"
 
 [node name="Fanfar" type="AudioStreamPlayer" parent="Victory" unique_id=132484187]
-stream = ExtResource("4_8wxmc")
+stream = ExtResource("4_fanfar")
 
 [connection signal="pressed" from="GameOver/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Victory/RestartButton" to="." method="_on_restart_button_pressed"]

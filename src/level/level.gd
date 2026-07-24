@@ -34,15 +34,15 @@ func _ready() -> void:
 	song_loop = 0
 	song_length = get_song_length(song)
 	Conductor.update.connect(_on_conductor_update)
-	
+
 	PlayerDataService.load_song(song)
 	GlobalValues.score = 0
 
 	for i in spawn_count:
 		EnemyService.request_spawn_enemy()
-	
-	for insturment in GlobalValues.unlock:
-		PlayerDataService.unlock_instrument(insturment)
+
+	for instrument in GlobalValues.unlock:
+		PlayerDataService.unlock_instrument(instrument)
 
 	add_child(_timer)
 	_timer.wait_time = spawn_interval
@@ -58,6 +58,7 @@ func _on_conductor_update(
 		return
 
 	if position >= song_length * 1.99:
+    song_finished = true
 		print('almost_victory')
 		UiService.request_game_end()
 		

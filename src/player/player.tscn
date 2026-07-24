@@ -5,42 +5,48 @@
 [ext_resource type="PackedScene" uid="uid://clrunh4xhdcah" path="res://src/rhythm_controller/rhythm_controller.tscn" id="2_mf2ua"]
 [ext_resource type="PackedScene" uid="uid://dxmiecia6xxmj" path="res://src/instruments/drums.tscn" id="2_rxibo"]
 [ext_resource type="PackedScene" uid="uid://ygjri5ooge1u" path="res://src/instruments/bass.tscn" id="4_5f2sf"]
+[ext_resource type="PackedScene" uid="uid://c86g4fbiwitjs" path="res://src/instruments/keyboard.tscn" id="5_o822w"]
 [ext_resource type="PackedScene" uid="uid://b7dwt6s6pe4e4" path="res://src/ui/ui.tscn" id="6_jiejy"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_gvfn3"]
-top_radius = 3.0
-bottom_radius = 3.0
-height = 0.5
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7vdnf"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fvpvq"]
-height = 0.5
-radius = 3.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7vdnf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gvfn3"]
 
 [node name="Player" type="CharacterBody3D" unique_id=634563065]
 script = ExtResource("1_4anbu")
 
-[node name="Lead" parent="." unique_id=838168437 node_paths=PackedStringArray("player") instance=ExtResource("2_5f2sf")]
-player = NodePath("..")
+[node name="PlayerSkin" type="Node3D" parent="." unique_id=1306054]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerSkin" unique_id=246656095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_7vdnf")
+
+[node name="Lead" parent="PlayerSkin" unique_id=838168437 node_paths=PackedStringArray("player") instance=ExtResource("2_5f2sf")]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0.9360863, -1.0064903)
+player = NodePath("../..")
+
+[node name="Drums" parent="PlayerSkin" unique_id=839120689 node_paths=PackedStringArray("player") instance=ExtResource("2_rxibo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0770222, 0.9349109)
+player = NodePath("../..")
+
+[node name="Bass" parent="PlayerSkin" unique_id=1120892320 node_paths=PackedStringArray("player") instance=ExtResource("4_5f2sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40526184, 1.1570835, -0.6280775)
+player = NodePath("../..")
+
+[node name="Keyboard" parent="PlayerSkin" unique_id=896325891 node_paths=PackedStringArray("player") instance=ExtResource("5_o822w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68573296, -1.068593)
+player = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422050821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_7vdnf")
 
 [node name="RhythmController" parent="." unique_id=967955007 node_paths=PackedStringArray("player") instance=ExtResource("2_mf2ua")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 player = NodePath("..")
-
-[node name="Drums" parent="." unique_id=839120689 node_paths=PackedStringArray("player") instance=ExtResource("2_rxibo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4798341, 0.47058564, 1.179371)
-player = NodePath("..")
-
-[node name="Bass" parent="." unique_id=1120892320 node_paths=PackedStringArray("player") instance=ExtResource("4_5f2sf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8548074, 0.478992, 0)
-player = NodePath("..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1421842133]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-mesh = SubResource("CylinderMesh_gvfn3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=654234615]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("CylinderShape3D_fvpvq")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=80034984]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 18, 6)
@@ -49,12 +55,12 @@ transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.2588
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=432024452]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("CylinderShape3D_fvpvq")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gvfn3")
 
 [node name="AttackEmissionPoint" type="Marker3D" parent="." unique_id=1905329643]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25441682, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92579806, 0)
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=1199453284]
 

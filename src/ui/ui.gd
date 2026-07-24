@@ -4,6 +4,11 @@ class_name UI
 @onready var health_label: Label = %Health
 @onready var game_over_ui: Control = %GameOver
 @export var fanfar: AudioStreamPlayer
+@onready var _game_over_background: Control = %GameOver/ColorRect
+@onready var _game_over_label: Control = %GameOver/VBoxContainer/Label
+@onready var _game_over_restart_buton: Control = %GameOver/VBoxContainer/RestartButton
+@onready var _game_over_stream_player: AudioStreamPlayer = %GameOverStreamPlayer
+
 
 func _ready() -> void:
 	UiService.update_health_label.connect(_on_update_health_label)
@@ -17,11 +22,23 @@ func _on_update_health_label(text: String) -> void:
 
 
 func _on_game_over() -> void:
-	game_over_ui.show()
 	get_tree().paused = true
-	
+
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(_game_over_background, "modulate:a", 1.0, 0.5)
+	tween.tween_callback(_game_over_stream_player.play)
+	tween.tween_property(_game_over_label, "modulate:a", 1.0, 1.5)
+	tween.parallel().tween_property(
+		_game_over_restart_buton,
+		"modulate:a",
+		1.0,
+		1.5
+	)
+
+
 func _on_game_ended() -> void:
-	print('VICTORY')
+	print("VICTORY")
 	$Victory.show()
 	get_tree().paused = true
 	fanfar.play()
@@ -35,4 +52,4 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_next_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/level/level.tscn") # here should be next level
+	get_tree().change_scene_to_file("res://src/level/level.tscn")

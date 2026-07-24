@@ -3,10 +3,21 @@
 [ext_resource type="Script" uid="uid://chxdvw1a1sbby" path="res://src/enemy/enemy.gd" id="1_6j2al"]
 [ext_resource type="Script" uid="uid://cjpgfby3lf13v" path="res://src/enemy/enemy_hurt_box.gd" id="2_ig63i"]
 [ext_resource type="Script" uid="uid://bqnp2estqu4bo" path="res://src/enemy/enemy_skin.gd" id="2_xso4u"]
+[ext_resource type="AudioStream" uid="uid://tec57nfw3u2r" path="res://assets/audio/sfx/GMTK SD_HIT_ENEMY 1.wav" id="4_uydu6"]
+[ext_resource type="AudioStream" uid="uid://d0mriymuys2nb" path="res://assets/audio/sfx/GMTK SD_HIT_ENEMY 2.wav" id="5_ll8s5"]
+[ext_resource type="AudioStream" uid="uid://c2b0g5g5m8ykm" path="res://assets/audio/sfx/GMTK SD_HIT_ENEMY 3.wav" id="6_pql7r"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_7vdnf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7vdnf"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7vdnf"]
+random_pitch = 1.1892071
+random_volume_offset_db = 2.0
+streams_count = 3
+stream_0/stream = ExtResource("4_uydu6")
+stream_1/stream = ExtResource("5_ll8s5")
+stream_2/stream = ExtResource("6_pql7r")
 
 [node name="Enemy" type="Node3D" unique_id=563102616 groups=["enemies"]]
 script = ExtResource("1_6j2al")
@@ -30,3 +41,9 @@ enemy = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtBox" unique_id=1380480945]
 shape = SubResource("SphereShape3D_7vdnf")
+
+[node name="HitStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=497607204]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_7vdnf")
+volume_db = 4.0
+pitch_scale = 1.2

@@ -1,13 +1,27 @@
 [gd_scene format=3 uid="uid://clrunh4xhdcah"]
 
 [ext_resource type="Script" uid="uid://23x8e60he8so" path="res://src/rhythm_controller/rhythm_controller.gd" id="1_tuyyq"]
+[ext_resource type="AudioStream" uid="uid://du87oj4qxxe8t" path="res://assets/audio/sfx/GMTK SD_FAIL RYTHM 1.wav" id="2_qrv3l"]
+[ext_resource type="AudioStream" uid="uid://cdt5b2bnw5ygd" path="res://assets/audio/sfx/GMTK SD_FAIL RYTHM 2.wav" id="3_4qsbn"]
+[ext_resource type="AudioStream" uid="uid://doadv2ab3ceni" path="res://assets/audio/sfx/GMTK SD_FAIL RYTHM 3.wav" id="4_0ev1g"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_pprnm"]
 inner_radius = 10.5
 outer_radius = 11.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7vdnf"]
+random_pitch = 1.1892071
+streams_count = 3
+stream_0/stream = ExtResource("2_qrv3l")
+stream_1/stream = ExtResource("3_4qsbn")
+stream_2/stream = ExtResource("4_0ev1g")
 
 [node name="RhythmController" type="Node3D" unique_id=967955007]
 script = ExtResource("1_tuyyq")
 
 [node name="Ring" type="MeshInstance3D" parent="." unique_id=263846802]
 mesh = SubResource("TorusMesh_pprnm")
+
+[node name="MissStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=935000346]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_7vdnf")
