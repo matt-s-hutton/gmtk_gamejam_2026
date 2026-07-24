@@ -13,7 +13,7 @@ var _target: Node3D
 func _ready() -> void:
 	set_physics_process(false)
 
-func setup(p: Player, pos: Vector3, enemy_grid: EnemyGrid, target: Node3D) -> void:
+func setup(_player: Player, pos: Vector3, enemy_grid: EnemyGrid, target: Node3D) -> void:
 	global_position = pos
 	_enemy_grid = enemy_grid
 	_target = target
@@ -26,7 +26,7 @@ func _key(pos: Vector3) -> Vector2i:
 		floori(pos.z / cell_size),
 	)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(_target):
 		self.queue_free()
 
