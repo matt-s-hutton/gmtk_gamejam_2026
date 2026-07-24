@@ -1,5 +1,8 @@
 extends Node3D
 
+
+@onready var miss_stream_player: AudioStreamPlayer = %MissStreamPlayer
+
 const _ARROW_SCENE: PackedScene = preload("res://src/rhythm_controller/rhythm_arrow.tscn")
 const _TEXT_SCENE: PackedScene = preload("res://src/rhythm_controller/rhythm_text.tscn")
 const HIT_WINDOW_BEATS: float = 0.3 # ±0.5 beats; tune to taste
@@ -36,10 +39,10 @@ class InputGrade:
 		color_array = _color_array
 
 var input_grading: Dictionary[float, InputGrade] = {
-	0.05: InputGrade.new("Perfect!", 100, [Color.VIOLET, Color.CYAN, Color.LIGHT_BLUE, Color.GREEN_YELLOW, Color.ORANGE_RED, Color.INDIAN_RED]),
-	0.1: InputGrade.new("Great!", 30, [Color.DARK_BLUE, Color.LIGHT_CYAN]),
-	0.2: InputGrade.new("Good", 30, [Color.GREEN_YELLOW]),
-	0.3: InputGrade.new("Okay", 30, [Color.DARK_ORANGE]),
+	0.05: InputGrade.new("Perfect!", 3, [Color.VIOLET, Color.CYAN, Color.LIGHT_BLUE, Color.GREEN_YELLOW, Color.ORANGE_RED, Color.INDIAN_RED]),
+	0.1: InputGrade.new("Great!", 2, [Color.DARK_BLUE, Color.LIGHT_CYAN]),
+	0.2: InputGrade.new("Good", 1, [Color.GREEN_YELLOW]),
+	0.3: InputGrade.new("Okay", 1, [Color.DARK_ORANGE]),
 }
 
 var all_arrows: Array[RhythmArrow] = []
@@ -57,13 +60,14 @@ func _on_arrow_hit(direction: Vector3, signed_delta: float) -> void:
 	player.hp_controller(heal_value)
 
 	for threshold in input_grading.keys():
-		if abs(signed_delta) < threshold:
+		if abs(signed_delta) < threshold:	
 			_show_message(direction, input_grading[threshold].text, input_grading[threshold].color_array)
+			GlobalValues.score += input_grading[threshold].points
 			break
 
 func _on_arrow_missed(direction: Vector3, signed_delta: float):
 	player.hp_controller(controler_damage)
-
+	miss_stream_player.play()
 	if signed_delta > 0:
 		_show_message(direction, "Late!", [Color.DARK_RED])
 	elif signed_delta < 0:
@@ -73,6 +77,7 @@ func _on_arrow_missed(direction: Vector3, signed_delta: float):
 
 var _all_current_directions: Array[String] = []
 func _on_beat(current_beat: int) -> void:
+	print(GlobalValues.score)
 	var arrow_directions = PlayerDataService.current_song.get_next_beat()
 	_all_current_directions.clear()
 

@@ -11,6 +11,7 @@ class_name Enemy
 @export var separation_update_interval: int = 4
 
 @onready var _enemy_skin: EnemySkin = %EnemySkin
+@onready var _hit_stream_player: AudioStreamPlayer3D = %HitStreamPlayer
 
 const _GRAVEYARD := Vector3(0, -1000, 0)
 
@@ -46,6 +47,7 @@ func _die() -> void:
 	if not _pathing:
 		return
 	deactivate()
+	GlobalValues.score += 2
 	EnemyService.request_deactivate_enemy(self)
 
 
@@ -98,6 +100,7 @@ func _compute_separation() -> Vector3:
 
 
 func hit(dmg_amount: int, knockback_dir: Vector3, knockback_amount: float) -> void:
+	_hit_stream_player.play()
 	_damage(dmg_amount)
 	_knockback(knockback_dir, knockback_amount)
 
