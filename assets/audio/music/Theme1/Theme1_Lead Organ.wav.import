@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cvja40xfat85e"
+path="res://.godot/imported/Theme1_Lead Organ.wav-5fa3db2c953f978d4851360f30f7c9e5.sample"
+
+[deps]
+
+source_file="res://assets/audio/music/Theme1/Theme1_Lead Organ.wav"
+dest_files=["res://.godot/imported/Theme1_Lead Organ.wav-5fa3db2c953f978d4851360f30f7c9e5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

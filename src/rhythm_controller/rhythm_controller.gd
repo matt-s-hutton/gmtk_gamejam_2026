@@ -70,23 +70,29 @@ func _on_arrow_missed(direction: Vector3, signed_delta: float):
 	else:
 		_show_message(direction, "Missed!", [Color.DARK_RED])
 
-
+var _all_current_directions: Array[String] = []
 func _on_beat(current_beat: int) -> void:
-	var arrow_direction = arrow_setup.keys().pick_random()
-	var arrow_data = arrow_setup[arrow_direction]
-
-	var new_arrow: RhythmArrow = _ARROW_SCENE.instantiate()
-	add_child(new_arrow)
-	new_arrow.missed.connect(_on_arrow_missed)
+	var arrow_directions = PlayerDataService.current_song.get_next_beat()
+	_all_current_directions.clear()
 	
-	# hardcoded for now; later this comes from chart data
-	var target_beat := float(current_beat) + LEAD_BEATS
+	for direction in arrow_directions:
+		if direction in _all_current_directions: continue # skip duplicates
+		_all_current_directions.append(direction)
+		
+		var arrow_data = arrow_setup[direction]
+		
+		var new_arrow: RhythmArrow = _ARROW_SCENE.instantiate()
+		add_child(new_arrow)
+		new_arrow.missed.connect(_on_arrow_missed)
+		
+		# hardcoded for now; later this comes from chart data
+		var target_beat := float(current_beat) + LEAD_BEATS
 
-	new_arrow.setup(arrow_data.angle, arrow_data.direction, arrow_data.color,
-		target_beat, LEAD_BEATS)
-	
-	all_arrows.append(new_arrow)
-	new_arrow.tree_exiting.connect(func(): all_arrows.erase(new_arrow))
+		new_arrow.setup(arrow_data.angle, arrow_data.direction, arrow_data.color,
+			target_beat, LEAD_BEATS)
+		
+		all_arrows.append(new_arrow)
+		new_arrow.tree_exiting.connect(func(): all_arrows.erase(new_arrow))
 
 func _try_hit_arrow(direction: Vector3) -> void:
 	var best_arrow: RhythmArrow = null
