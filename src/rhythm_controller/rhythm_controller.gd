@@ -9,6 +9,7 @@ const HIT_WINDOW_BEATS: float = 0.3 # ±0.5 beats; tune to taste
 const LEAD_BEATS: float = 2.0 # arrow visible for 2 beats before its hit
 var controler_damage: int = -10
 var heal_value: int = 10
+var arrow_timeout: int = 2
 @export var player: Player
 
 class ArrowSettings:
@@ -79,25 +80,25 @@ func _on_beat(current_beat: int) -> void:
 	print(GlobalValues.score)
 	var arrow_directions = PlayerDataService.current_song.get_next_beat()
 	_all_current_directions.clear()
+	if int(current_beat) % arrow_timeout == 0:
+		for direction in arrow_directions:
+			if direction in _all_current_directions: continue # skip duplicates
+			_all_current_directions.append(direction)
 
-	for direction in arrow_directions:
-		if direction in _all_current_directions: continue # skip duplicates
-		_all_current_directions.append(direction)
+			var arrow_data = arrow_setup[direction]
 
-		var arrow_data = arrow_setup[direction]
+			var new_arrow: RhythmArrow = _ARROW_SCENE.instantiate()
+			add_child(new_arrow)
+			new_arrow.missed.connect(_on_arrow_missed)
 
-		var new_arrow: RhythmArrow = _ARROW_SCENE.instantiate()
-		add_child(new_arrow)
-		new_arrow.missed.connect(_on_arrow_missed)
+			# hardcoded for now; later this comes from chart data
+			var target_beat := float(current_beat) + LEAD_BEATS
 
-		# hardcoded for now; later this comes from chart data
-		var target_beat := float(current_beat) + LEAD_BEATS
+			new_arrow.setup(arrow_data.angle, arrow_data.direction, arrow_data.color,
+				target_beat, LEAD_BEATS)
 
-		new_arrow.setup(arrow_data.angle, arrow_data.direction, arrow_data.color,
-			target_beat, LEAD_BEATS)
-
-		all_arrows.append(new_arrow)
-		new_arrow.tree_exiting.connect(func(): all_arrows.erase(new_arrow))
+			all_arrows.append(new_arrow)
+			new_arrow.tree_exiting.connect(func(): all_arrows.erase(new_arrow))
 
 func _try_hit_arrow(direction: Vector3) -> void:
 	var best_arrow: RhythmArrow = null
