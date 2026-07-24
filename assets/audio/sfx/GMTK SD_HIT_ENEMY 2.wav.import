@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d0mriymuys2nb"
+path="res://.godot/imported/GMTK SD_HIT_ENEMY 2.wav-002be21d261ad3f76433fbd38c906ae2.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/GMTK SD_HIT_ENEMY 2.wav"
+dest_files=["res://.godot/imported/GMTK SD_HIT_ENEMY 2.wav-002be21d261ad3f76433fbd38c906ae2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

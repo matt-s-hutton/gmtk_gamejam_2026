@@ -19,13 +19,13 @@ var scrub_position: int = 0 # Position of the beat
 func _ready() -> void:
 	if beatmap:
 		_beatmap_data = beatmap.data
-		
+
 		# Check if data is Array shaped
 		if beatmap.data is not Array:
 			_beatmap_data = []
 			_valid_beatmap = false
 			return
-		
+
 		# Validate beatmap data
 		_valid_beatmap = true
 		for line in _beatmap_data:
@@ -33,7 +33,7 @@ func _ready() -> void:
 			if line is not Array:
 				_valid_beatmap = false
 				break
-			
+
 			# Check if each direction is valid
 			for beat in line:
 				if not beat in _valid_directions:
@@ -42,15 +42,13 @@ func _ready() -> void:
 
 func _reset_state() -> void:
 	scrub_position = 0
-		
+
 func get_next_beat() -> Array[String]:
 	if _valid_beatmap:
 		return _beatmap_data[scrub_position]
 	else:
 		var roll = randf()
-		if roll < 0.1:
-			return []
-		elif roll < 0.8:
+		if roll < 0.45:
 			return [_valid_directions.pick_random()]
 		else:
-			return [_valid_directions.pick_random(), _valid_directions.pick_random()]
+			return []
