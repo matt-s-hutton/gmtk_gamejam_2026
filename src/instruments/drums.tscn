@@ -12,12 +12,14 @@ height = 0.5
 [node name="Drums" type="Node3D" unique_id=838168437]
 script = ExtResource("1_4ow1o")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1500814906]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24983269, 0)
-mesh = SubResource("CylinderMesh_7vdnf")
-
 [node name="AttackTimer" type="Timer" parent="." unique_id=565750425]
 wait_time = 2.0
 autostart = true
+
+[node name="DrumsSkin" type="Node3D" parent="." unique_id=1640296268]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DrumsSkin" unique_id=1500814906]
+mesh = SubResource("CylinderMesh_7vdnf")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

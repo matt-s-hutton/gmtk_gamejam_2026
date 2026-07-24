@@ -6,6 +6,7 @@ class_name Player
 @export var damage_value := -20
 
 @onready var attack_emission_point: Marker3D = %AttackEmissionPoint
+@onready var player_skin: Node3D = %PlayerSkin
 
 var can_damage: bool = true
 var cooldown:float = 1.0
@@ -24,6 +25,7 @@ func _physics_process(_delta: float) -> void:
 	dir = Vector3(input.x, 0.0, input.y)
 	if dir != Vector3.ZERO:
 		facing_dir = dir
+		player_skin.look_at(global_position + facing_dir, Vector3.UP)
 	velocity.x = dir.x * max_speed
 	velocity.z = dir.z * max_speed
 	move_and_slide()

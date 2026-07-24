@@ -12,7 +12,7 @@ class ArrowSettings:
 	var angle: float
 	var direction: Vector3
 	var color: Color
-	
+
 	func _init(_angle: float = 0.0, _direction: Vector3 = Vector3.ZERO, _color: Color = Color.WHITE):
 		angle = _angle
 		direction = _direction
@@ -29,7 +29,7 @@ class InputGrade:
 	var text: String
 	var points: int
 	var color_array: Array[Color]
-	
+
 	func _init(_text: String = "", _points: int = 0, _color_array: Array[Color] = []):
 		text = _text
 		points = _points
@@ -62,7 +62,7 @@ func _on_arrow_hit(direction: Vector3, signed_delta: float) -> void:
 
 func _on_arrow_missed(direction: Vector3, signed_delta: float):
 	player.hp_controller(controler_damage)
-	
+
 	if signed_delta > 0:
 		_show_message(direction, "Late!", [Color.DARK_RED])
 	elif signed_delta < 0:
@@ -74,23 +74,23 @@ var _all_current_directions: Array[String] = []
 func _on_beat(current_beat: int) -> void:
 	var arrow_directions = PlayerDataService.current_song.get_next_beat()
 	_all_current_directions.clear()
-	
+
 	for direction in arrow_directions:
 		if direction in _all_current_directions: continue # skip duplicates
 		_all_current_directions.append(direction)
-		
+
 		var arrow_data = arrow_setup[direction]
-		
+
 		var new_arrow: RhythmArrow = _ARROW_SCENE.instantiate()
 		add_child(new_arrow)
 		new_arrow.missed.connect(_on_arrow_missed)
-		
+
 		# hardcoded for now; later this comes from chart data
 		var target_beat := float(current_beat) + LEAD_BEATS
 
 		new_arrow.setup(arrow_data.angle, arrow_data.direction, arrow_data.color,
 			target_beat, LEAD_BEATS)
-		
+
 		all_arrows.append(new_arrow)
 		new_arrow.tree_exiting.connect(func(): all_arrows.erase(new_arrow))
 
@@ -105,7 +105,7 @@ func _try_hit_arrow(direction: Vector3) -> void:
 			if d < min_delta:
 				min_delta = d
 				best_arrow = arrow
-	
+
 
 	if best_arrow != null and min_delta <= HIT_WINDOW_BEATS: # Sucessful Hit
 		var signed_delta := Conductor.current_beat - best_arrow.target_beat
