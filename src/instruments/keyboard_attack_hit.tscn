@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c1nkw6d2m1uvp"]
+
+[ext_resource type="Script" uid="uid://bckpncjg263py" path="res://src/instruments/keyboard_attack_hit.gd" id="1_2wpyx"]
+[ext_resource type="PackedScene" uid="uid://d2wccndn1if2p" path="res://addons/explosion/Scenes/VFX_Explosion_A.tscn" id="2_j6u2r"]
+[ext_resource type="AudioStream" uid="uid://ji61eat7hsvc" path="res://assets/audio/sfx/explosion_quick.wav" id="3_str85"]
+[ext_resource type="AudioStream" uid="uid://dnk3ha1bmn833" path="res://assets/audio/sfx/explosion_small.wav" id="4_j6u2r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7vdnf"]
+radius = 4.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7vdnf"]
+playback_mode = 1
+random_pitch = 1.1892071
+streams_count = 2
+stream_0/stream = ExtResource("3_str85")
+stream_1/stream = ExtResource("4_j6u2r")
+
+[node name="KeyboardAttackHit" type="Node3D" unique_id=253107907]
+script = ExtResource("1_2wpyx")
+
+[node name="explosion_A" parent="." unique_id=1160025001 instance=ExtResource("2_j6u2r")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1202844308]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1665802846]
+shape = SubResource("SphereShape3D_7vdnf")
+
+[node name="ExplosionStreamPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1935637806]
+stream = SubResource("AudioStreamRandomizer_7vdnf")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="damage_end" from="explosion_A" to="." method="_on_explosion_a_damage_end"]
+[connection signal="animation_finished" from="explosion_A/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="finished" from="ExplosionStreamPlayer" to="." method="_on_explosion_stream_player_finished"]
+
+[editable path="explosion_A"]
