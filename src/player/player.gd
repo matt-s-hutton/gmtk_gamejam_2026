@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 @export var max_speed := 8.0
-@export var max_hp := 100000
+@export var max_hp := 100
 @export var damage_value := -20
 
 @onready var attack_emission_point: Marker3D = %AttackEmissionPoint
