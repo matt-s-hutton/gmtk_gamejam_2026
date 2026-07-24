@@ -60,7 +60,7 @@ func _on_arrow_hit(direction: Vector3, signed_delta: float) -> void:
 	player.hp_controller(heal_value)
 
 	for threshold in input_grading.keys():
-		if abs(signed_delta) < threshold:	
+		if abs(signed_delta) < threshold:
 			_show_message(direction, input_grading[threshold].text, input_grading[threshold].color_array)
 			GlobalValues.score += input_grading[threshold].points
 			break

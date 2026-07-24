@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dt8ajpr7ba0w8"]
+
+[ext_resource type="Script" uid="uid://c5u3qh1bwh26t" path="res://src/instruments/strings_instrument_attack.gd" id="1_ufjk8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7vdnf"]
+height = 0.2
+
+[sub_resource type="PrismMesh" id="PrismMesh_7vdnf"]
+size = Vector3(0.37, 0.285, 0.12)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7vdnf"]
+radius = 0.9
+
+[node name="StringsInstrumentAttack" type="Node3D" unique_id=1986053017]
+script = ExtResource("1_ufjk8")
+min_throw_radius = 12.0
+max_throw_radius = 14.0
+catch_radius = 10.0
+flyoff_time = 12.0
+
+[node name="StringsInstrumentAttackSkin" type="Node3D" parent="." unique_id=254434627]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StringsInstrumentAttackSkin" unique_id=845277592]
+mesh = SubResource("CylinderMesh_7vdnf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StringsInstrumentAttackSkin" unique_id=184600070]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.5963416)
+mesh = SubResource("PrismMesh_7vdnf")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StringsInstrumentAttackSkin" unique_id=2141976580]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.596)
+mesh = SubResource("PrismMesh_7vdnf")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StringsInstrumentAttackSkin" unique_id=1386087638]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0.596, 0, 0)
+mesh = SubResource("PrismMesh_7vdnf")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="StringsInstrumentAttackSkin" unique_id=2140452950]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, -0.596, 0, 0)
+mesh = SubResource("PrismMesh_7vdnf")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2085915655]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=142895129]
+shape = SubResource("SphereShape3D_7vdnf")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
