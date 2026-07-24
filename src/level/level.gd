@@ -58,7 +58,7 @@ func _on_conductor_update(
 		return
 
 	if position >= song_length * 1.99:
-    song_finished = true
+	    song_finished = true
 		print('almost_victory')
 		UiService.request_game_end()
 		
