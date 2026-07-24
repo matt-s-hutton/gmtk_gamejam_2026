@@ -13,7 +13,9 @@ radius = 0.9
 
 [node name="StringsInstrumentAttack" type="Node3D" unique_id=1986053017]
 script = ExtResource("1_ufjk8")
-catch_threshold_sq = 40.0
+min_throw_radius = 20.0
+catch_radius = 10.0
+flyoff_time = 12.0
 
 [node name="StringsInstrumentAttackSkin" type="Node3D" parent="." unique_id=254434627]
 unique_name_in_owner = true
