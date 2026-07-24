@@ -5,27 +5,67 @@ extends Node3D
 @export var spawn_interval: float = 0.5
 
 @export var player: Player
-
 @export var song: Song
 
-@export_enum("bass", "drums", "keys", "lead", "strings")
-var unlocks: Array[String] = []
-
 var _timer := Timer.new()
+var song_length := 0.0
+var song_finished := false
+var song_loop: int = 0
+
+func get_song_length(song) -> float:
+	var length := 0.0
+
+	var streams: Array[AudioStream] = [
+		song.metronone,
+		song.bass,
+		song.drums,
+		song.keys,
+		song.lead,
+		song.strings,
+	]
+
+	for stream in streams:
+		if stream != null:
+			length = maxf(length, stream.get_length())
+
+	return length
 
 func _ready() -> void:
+	song_loop = 0
+	song_length = get_song_length(song)
+	Conductor.update.connect(_on_conductor_update)
+	
 	PlayerDataService.load_song(song)
+	GlobalValues.score = 0
+	GlobalValues.victory = false
 
 	for i in spawn_count:
 		EnemyService.request_spawn_enemy()
 	
-	for insturment in unlocks:
+	for insturment in GlobalValues.unlock:
 		PlayerDataService.unlock_instrument(insturment)
 
 	add_child(_timer)
 	_timer.wait_time = spawn_interval
 	_timer.timeout.connect(_on_spawn_tick)
 	_timer.start()
+
+func _on_conductor_update(
+	_delta: float,
+	position: float,
+	_measure
+) -> void:
+	if song_finished:
+		return
+
+	if position >= song_length * 2:
+		print('almost_victory')
+		song_finished = true
+		GlobalValues.victory = true
+		_timer.stop()
+		UiService.request_game_end()
+		
+	
 
 
 func _on_spawn_tick() -> void:

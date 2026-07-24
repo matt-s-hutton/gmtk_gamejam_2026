@@ -46,6 +46,7 @@ func _die() -> void:
 	if not _pathing:
 		return
 	deactivate()
+	GlobalValues.score += 2
 	EnemyService.request_deactivate_enemy(self)
 
 
