@@ -2,21 +2,34 @@
 
 [ext_resource type="Script" uid="uid://cfm5etu0qa4el" path="res://src/instruments/lead.gd" id="1_1jq1g"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kf7po"]
-albedo_color = Color(1, 0.42352942, 1, 1)
+[sub_resource type="CylinderMesh" id="CylinderMesh_kf7po"]
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.4
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_7vdnf"]
-material = SubResource("StandardMaterial3D_kf7po")
-height = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvfn3"]
+albedo_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7vdnf"]
+material = SubResource("StandardMaterial3D_gvfn3")
+radius = 0.13
+height = 0.26
 
 [node name="Lead" type="Node3D" unique_id=838168437]
 script = ExtResource("1_1jq1g")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1500814906]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24983269, 0)
-mesh = SubResource("CylinderMesh_7vdnf")
-
 [node name="atack_timer" type="Timer" parent="." unique_id=1530087571]
 autostart = true
+
+[node name="LeadSkin" type="Node3D" parent="." unique_id=1230575398]
+transform = Transform3D(1, 0, 0, 0, 0.7360971, -0.67687595, 0, 0.67687595, 0.7360971, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeadSkin" unique_id=1500814906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24983269, 0)
+mesh = SubResource("CylinderMesh_kf7po")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LeadSkin" unique_id=1720321277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5572006, 0)
+mesh = SubResource("SphereMesh_7vdnf")
 
 [connection signal="timeout" from="atack_timer" to="." method="_on_atack_timer_timeout"]

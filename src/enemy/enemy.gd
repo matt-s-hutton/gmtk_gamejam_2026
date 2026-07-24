@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 		rotation.y = lerp_angle(rotation.y, target_yaw, turn_speed * delta)
 
 	global_position += (move + _knockback_velocity) * delta
+	global_position.y = 0.0
 
 
 func _separation_force() -> Vector3:
