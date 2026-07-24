@@ -9,7 +9,7 @@ class_name Enemy
 @export var separation_radius: float = 1.5
 @export var separation_strength: float = 4.0
 @export var separation_update_interval: int = 4
-
+@export var damage_value:float = -20
 @onready var _enemy_skin: EnemySkin = %EnemySkin
 @onready var _hit_stream_player: AudioStreamPlayer3D = %HitStreamPlayer
 
