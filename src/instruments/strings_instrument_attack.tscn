@@ -13,7 +13,8 @@ radius = 0.9
 
 [node name="StringsInstrumentAttack" type="Node3D" unique_id=1986053017]
 script = ExtResource("1_ufjk8")
-min_throw_radius = 20.0
+min_throw_radius = 12.0
+max_throw_radius = 14.0
 catch_radius = 10.0
 flyoff_time = 12.0
 

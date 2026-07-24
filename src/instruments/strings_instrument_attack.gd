@@ -17,14 +17,16 @@ class_name StringsInstrumentAttack
 
 @onready var _skin: Node3D = %StringsInstrumentAttackSkin
 
-enum Phase { OUT, RETURN, FLYOFF }
+enum State { OUT, RETURN, FLYOFF }
 
 var _player: Player
-var _phase: int = Phase.OUT
+var _current_state: int = State.OUT
 var _out_target: Vector3
 var _velocity: Vector3
 var _launched: bool = false
 var _flyoff_elapsed: float = 0.0
+
+const REACH_DISTANCE := 0.63
 
 
 func setup(p: Player) -> void:
@@ -46,20 +48,17 @@ func _physics_process(delta: float) -> void:
 
 	var player_pos := _player.attack_emission_point.global_position
 
-	match _phase:
-		Phase.OUT:
-			if global_position.distance_squared_to(_out_target) <= 0.4:
-				_phase = Phase.RETURN
-		Phase.RETURN:
-			# Pull toward the player; derived from throw so it always comes home.
+	match _current_state:
+		State.OUT:
+			if global_position.distance_squared_to(_out_target) <= REACH_DISTANCE * REACH_DISTANCE:
+				_current_state = State.RETURN
+		State.RETURN:
 			var pull := throw_speed * throw_speed / max_throw_radius
 			_velocity += (player_pos - global_position).normalized() * pull * delta
 			_velocity = _velocity.limit_length(throw_speed * 1.5)
-			# Reached the player: commit to current heading and fly off.
 			if global_position.distance_squared_to(player_pos) <= catch_radius * catch_radius:
-				_phase = Phase.FLYOFF
-		Phase.FLYOFF:
-			# No more pull — coast straight on the velocity we had, then despawn.
+				_current_state = State.FLYOFF
+		State.FLYOFF:
 			_flyoff_elapsed += delta
 			if _flyoff_elapsed >= flyoff_time:
 				queue_free()
