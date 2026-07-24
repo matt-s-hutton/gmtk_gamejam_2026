@@ -21,6 +21,7 @@ Conductor="*uid://c5rvmkaorxynb"
 UiService="*uid://l5n5nhrsfw28"
 EnemyService="*uid://boyp83mtca23n"
 PlayerDataService="*uid://dt8dmqnt42evp"
+GlobalValues="*uid://bipfpwlr831wv"
 
 [display]
 

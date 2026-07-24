@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bk7a3pchvmqvo" path="res://src/ui/ui.gd" id="1_sp1ie"]
 [ext_resource type="LabelSettings" uid="uid://ynv1r8sthpnh" path="res://src/ui/hud_label_settings.tres" id="2_jlntk"]
-[ext_resource type="AudioStream" uid="uid://dxd1qts1ostpq" path="res://assets/audio/sfx/Game Over.wav" id="3_qemve"]
+[ext_resource type="Texture2D" uid="uid://sg4ymikstcj2" path="res://src/ui/victory_screen.png" id="3_victory"]
+[ext_resource type="AudioStream" uid="uid://cxa4o32j0addi" path="res://src/ui/Victory Fanfare.wav" id="4_fanfar"]
+[ext_resource type="AudioStream" uid="uid://dxd1qts1ostpq" path="res://assets/audio/sfx/Game Over.wav" id="5_game_over"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qemve"]
 bg_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
@@ -25,7 +27,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="UI" type="Control" unique_id=1757368918]
+[node name="UI" type="Control" unique_id=1757368918 node_paths=PackedStringArray("fanfar")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -35,6 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_sp1ie")
+fanfar = NodePath("Victory/Fanfar")
 
 [node name="HUD" type="Control" parent="." unique_id=1419874616]
 layout_mode = 1
@@ -140,6 +143,47 @@ text = "Encore"
 [node name="GameOverStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=909219093]
 unique_name_in_owner = true
 process_mode = 2
-stream = ExtResource("3_qemve")
+stream = ExtResource("5_game_over")
+
+[node name="Victory" type="Control" parent="." unique_id=511192001]
+process_mode = 3
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Victory" unique_id=378707561]
+position = Vector2(577.0257, 323.5)
+scale = Vector2(1.8371428, 1.8371428)
+texture = ExtResource("3_victory")
+
+[node name="RestartButton" type="Button" parent="Victory" unique_id=602091249]
+process_mode = 2
+layout_mode = 0
+offset_left = 360.0
+offset_top = 503.0
+offset_right = 541.1321
+offset_bottom = 583.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[node name="NextButton" type="Button" parent="Victory" unique_id=1087813111]
+process_mode = 2
+layout_mode = 0
+offset_left = 603.0
+offset_top = 503.0
+offset_right = 784.1321
+offset_bottom = 583.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "Next Level"
+
+[node name="Fanfar" type="AudioStreamPlayer" parent="Victory" unique_id=132484187]
+stream = ExtResource("4_fanfar")
 
 [connection signal="pressed" from="GameOver/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Victory/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Victory/NextButton" to="." method="_on_next_button_pressed"]

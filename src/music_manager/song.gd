@@ -51,4 +51,4 @@ func get_next_beat() -> Array[String]:
 		if roll < 0.45:
 			return [_valid_directions.pick_random()]
 		else:
-			return []
+			return [_valid_directions.pick_random(), _valid_directions.pick_random()]
