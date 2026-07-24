@@ -5,6 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://sg4ymikstcj2" path="res://src/ui/victory_screen.png" id="3_victory"]
 [ext_resource type="AudioStream" uid="uid://cxa4o32j0addi" path="res://src/ui/Victory Fanfare.wav" id="4_fanfar"]
 [ext_resource type="AudioStream" uid="uid://dxd1qts1ostpq" path="res://assets/audio/sfx/Game Over.wav" id="5_game_over"]
+[ext_resource type="Texture2D" uid="uid://cpc0akvt3f6sj" path="res://assets/ui/keyboard_w_outline.png" id="6_wwjrv"]
+[ext_resource type="Texture2D" uid="uid://ddtsjcpvvvnp6" path="res://assets/ui/keyboard_a_outline.png" id="7_ri2wq"]
+[ext_resource type="Texture2D" uid="uid://5vv5m880s8vt" path="res://assets/ui/keyboard_s_outline.png" id="8_idipi"]
+[ext_resource type="Texture2D" uid="uid://sdpdl1adxrgu" path="res://assets/ui/keyboard_d_outline.png" id="9_6s7ef"]
+[ext_resource type="Texture2D" uid="uid://bo4ghs2yg5v6a" path="res://assets/ui/keyboard_arrow_up_outline.png" id="10_yo02o"]
+[ext_resource type="Texture2D" uid="uid://cdhp6lvdna64o" path="res://assets/ui/keyboard_arrow_left_outline.png" id="11_eofyr"]
+[ext_resource type="Texture2D" uid="uid://c5srsoswtyjoe" path="res://assets/ui/keyboard_arrow_down_outline.png" id="12_1kq2p"]
+[ext_resource type="Texture2D" uid="uid://bxsird5p2d0dc" path="res://assets/ui/keyboard_arrow_right_outline.png" id="13_5kva4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qemve"]
 bg_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
@@ -40,6 +48,8 @@ script = ExtResource("1_sp1ie")
 fanfar = NodePath("Victory/Fanfar")
 
 [node name="HUD" type="Control" parent="." unique_id=1419874616]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,7 +81,8 @@ label_settings = ExtResource("2_jlntk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="HUD/VBoxContainer" unique_id=1170686866]
+[node name="TimeLeft" type="Label" parent="HUD/VBoxContainer" unique_id=1170686866]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "01:30"
@@ -124,6 +135,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RestartButton" type="Button" parent="GameOver/VBoxContainer" unique_id=229587695]
+process_mode = 2
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
@@ -184,6 +196,199 @@ text = "Next Level"
 [node name="Fanfar" type="AudioStreamPlayer" parent="Victory" unique_id=132484187]
 stream = ExtResource("4_fanfar")
 
+[node name="TutorialUI" type="Control" parent="." unique_id=1387396181]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="TutorialUI" unique_id=1070910323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.7529412)
+
+[node name="HowToPlayHeader" type="Label" parent="TutorialUI" unique_id=1489808747]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 27.0
+offset_right = 302.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 40
+text = "HOW TO PLAY"
+
+[node name="MovementInputHeader" type="Label" parent="TutorialUI" unique_id=1356130590]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 113.0
+offset_right = 382.0
+offset_bottom = 168.0
+theme_override_font_sizes/font_size = 40
+text = "MOVEMENT"
+
+[node name="RhythmInputHeader" type="Label" parent="TutorialUI" unique_id=1545070952]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 378.0
+offset_right = 411.0
+offset_bottom = 433.0
+theme_override_font_sizes/font_size = 40
+text = "RHYTHM"
+
+[node name="Blurb" type="Label" parent="TutorialUI" unique_id=572710191]
+custom_minimum_size = Vector2(750, 100)
+layout_mode = 0
+offset_left = 388.0
+offset_top = 38.0
+offset_right = 1138.0
+offset_bottom = 386.0
+theme_override_font_sizes/font_size = 26
+text = "Use WASD to move and dodge enemies!
+
+Use the arrow keys to hit the arrows when they're above the outer ring!
+
+Your instruments are your weapons! They attack automatically!
+You have drums already, choose another instrument to go along with the drums:"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialUI" unique_id=439372178]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 426.0
+offset_right = 1095.0
+offset_bottom = 598.0
+theme_override_constants/separation = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialUI/HBoxContainer" unique_id=150508695]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BassButton" type="Button" parent="TutorialUI/HBoxContainer/VBoxContainer" unique_id=338365085]
+process_mode = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Bass"
+
+[node name="Label" type="Label" parent="TutorialUI/HBoxContainer/VBoxContainer" unique_id=1138484297]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+text = "The bass can project a wave of energy in the direction you're facing."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TutorialUI/HBoxContainer" unique_id=715751810]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KeyboardButton" type="Button" parent="TutorialUI/HBoxContainer/VBoxContainer2" unique_id=440968984]
+process_mode = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Keyboard"
+
+[node name="Label" type="Label" parent="TutorialUI/HBoxContainer/VBoxContainer2" unique_id=1192862400]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+text = "The keyboard allows yout to shoot missiles at random locations."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MovementKeys" type="Control" parent="TutorialUI" unique_id=1053718763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="W" type="TextureRect" parent="TutorialUI/MovementKeys" unique_id=299597912]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 152.0
+offset_right = 285.0
+offset_bottom = 280.0
+texture = ExtResource("6_wwjrv")
+
+[node name="A" type="TextureRect" parent="TutorialUI/MovementKeys" unique_id=804795315]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 248.0
+offset_right = 189.0
+offset_bottom = 376.0
+texture = ExtResource("7_ri2wq")
+
+[node name="S" type="TextureRect" parent="TutorialUI/MovementKeys" unique_id=696002393]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 248.0
+offset_right = 285.0
+offset_bottom = 376.0
+texture = ExtResource("8_idipi")
+
+[node name="D" type="TextureRect" parent="TutorialUI/MovementKeys" unique_id=116514445]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 248.0
+offset_right = 381.0
+offset_bottom = 376.0
+texture = ExtResource("9_6s7ef")
+
+[node name="RhythmKeys" type="Control" parent="TutorialUI" unique_id=1338098597]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Up" type="TextureRect" parent="TutorialUI/RhythmKeys" unique_id=630540689]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 416.0
+offset_right = 284.0
+offset_bottom = 544.0
+texture = ExtResource("10_yo02o")
+
+[node name="Left" type="TextureRect" parent="TutorialUI/RhythmKeys" unique_id=1569687557]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 512.0
+offset_right = 188.0
+offset_bottom = 640.0
+texture = ExtResource("11_eofyr")
+
+[node name="Down" type="TextureRect" parent="TutorialUI/RhythmKeys" unique_id=543051725]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 512.0
+offset_right = 284.0
+offset_bottom = 640.0
+texture = ExtResource("12_1kq2p")
+
+[node name="Right" type="TextureRect" parent="TutorialUI/RhythmKeys" unique_id=1052371370]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 512.0
+offset_right = 380.0
+offset_bottom = 640.0
+texture = ExtResource("13_5kva4")
+
 [connection signal="pressed" from="GameOver/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Victory/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Victory/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="TutorialUI/HBoxContainer/VBoxContainer/BassButton" to="." method="_on_bass_button_pressed"]
+[connection signal="pressed" from="TutorialUI/HBoxContainer/VBoxContainer2/KeyboardButton" to="." method="_on_keyboard_button_pressed"]

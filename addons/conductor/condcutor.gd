@@ -115,3 +115,9 @@ func reset_tracking() -> void:
 	_prev_raw_beat = 0.0
 	loop_offset = 0.0
 	is_playing_offset = false
+
+func get_time_left() -> float:
+	if stream == null:
+		return 0.0
+	var pos = get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+	return stream.get_length() - pos

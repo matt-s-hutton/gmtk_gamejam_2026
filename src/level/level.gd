@@ -12,25 +12,12 @@ var song_length := 0.0
 var song_finished := false
 var song_loop: int = 0
 
-func get_song_length(song) -> float:
-	var length := 0.0
-
-	var streams: Array[AudioStream] = [
-		song.metronone,
-		song.bass,
-		song.drums,
-		song.keys,
-		song.lead,
-		song.strings,
-	]
-
-	for stream in streams:
-		if stream != null:
-			length = maxf(length, stream.get_length())
-
-	return length
 
 func _ready() -> void:
+	UiService.game_start.connect(_on_game_start)
+
+
+func _on_game_start() -> void:
 	song_loop = 0
 	song_length = get_song_length(song)
 	Conductor.update.connect(_on_conductor_update)
@@ -49,6 +36,26 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_spawn_tick)
 	_timer.start()
 
+
+func get_song_length(song) -> float:
+	var length := 0.0
+
+	var streams: Array[AudioStream] = [
+		song.metronone,
+		song.bass,
+		song.drums,
+		song.keys,
+		song.lead,
+		song.strings,
+	]
+
+	for stream in streams:
+		if stream != null:
+			length = maxf(length, stream.get_length())
+
+	return length
+
+
 func _on_conductor_update(
 	_delta: float,
 	position: float,
@@ -61,7 +68,7 @@ func _on_conductor_update(
 		song_finished = true
 		print('almost_victory')
 		UiService.request_game_end()
-		
+
 
 
 func _on_spawn_tick() -> void:
