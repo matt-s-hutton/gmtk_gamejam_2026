@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://b23aoof5ovirx"]
 
 [ext_resource type="Script" uid="uid://dyugjuolk07hl" path="res://src/music_manager/music_manager.gd" id="1_svbpx"]
-[ext_resource type="AudioStream" uid="uid://cfs2l5tt8ujjr" path="res://assets/audio/music/Jam Theme1.wav" id="2_2snw0"]
 
 [node name="RhythmConductor" type="Node" unique_id=212461948]
 script = ExtResource("1_svbpx")
-current_song = ExtResource("2_2snw0")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Song" format=3 uid="uid://24xu3ys2fvt2"]
+
+[ext_resource type="AudioStream" uid="uid://d1w7erins881q" path="res://assets/audio/music/Theme1/Theme1_Bass.wav" id="1_hnjhq"]
+[ext_resource type="Script" uid="uid://biugcja2q3k1w" path="res://src/music_manager/song.gd" id="1_rb4t2"]
+[ext_resource type="AudioStream" uid="uid://kajtsbaojbjh" path="res://assets/audio/music/Theme1/Theme1_Drums.wav" id="2_oag2q"]
+[ext_resource type="AudioStream" uid="uid://dagbyen8nlx2h" path="res://assets/audio/music/Theme1/Theme1_Keyboard.wav" id="3_os5be"]
+[ext_resource type="AudioStream" uid="uid://cvja40xfat85e" path="res://assets/audio/music/Theme1/Theme1_Lead Organ.wav" id="4_sqyju"]
+[ext_resource type="AudioStream" uid="uid://bvuexywevaw5n" path="res://assets/audio/music/Theme1/Theme1_Final.wav" id="5_h8xam"]
+[ext_resource type="AudioStream" uid="uid://c0th2ei026knh" path="res://assets/audio/music/Theme1/Theme1_Strings.wav" id="7_wd7xm"]
+
+[resource]
+script = ExtResource("1_rb4t2")
+metronone = ExtResource("5_h8xam")
+bass = ExtResource("1_hnjhq")
+drums = ExtResource("2_oag2q")
+keys = ExtResource("3_os5be")
+lead = ExtResource("4_sqyju")
+strings = ExtResource("7_wd7xm")
+metadata/_custom_type_script = "uid://biugcja2q3k1w"

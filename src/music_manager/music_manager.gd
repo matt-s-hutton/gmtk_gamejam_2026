@@ -3,18 +3,19 @@ class_name MusicManager
 
 @export var current_song: Song
 
-const _instruments = ["bass", "drums", "keys", "lead", "strings"]
 var instrument_stream_players: Dictionary = {}
 
 func _ready() -> void:
+	var insturments = PlayerDataService.get_all_insturments()
+	
 	if current_song:
 		# Setup Metronone
 		Conductor.set_song(current_song.metronone, 150, 4)
 		Conductor.volume_db = -100
 		Conductor.play()
-
+		
 		# Play all tracks
-		for instrument in _instruments:
+		for instrument in insturments:
 			var stream_player = AudioStreamPlayer.new()
 			add_child(stream_player)
 			
