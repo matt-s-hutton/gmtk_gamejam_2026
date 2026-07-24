@@ -19,6 +19,8 @@ var facing_dir := Vector3.ZERO
 
 func _ready() -> void:
 	hp = max_hp
+	UiService.request_update_health_label(str(hp))
+
 
 func _physics_process(_delta: float) -> void:
 	var input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -29,6 +31,7 @@ func _physics_process(_delta: float) -> void:
 	velocity.x = dir.x * max_speed
 	velocity.z = dir.z * max_speed
 	move_and_slide()
+
 
 func hp_controller(value: int):
 	hp = mini(hp + value, max_hp)

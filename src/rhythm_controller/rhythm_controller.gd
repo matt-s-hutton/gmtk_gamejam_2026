@@ -1,5 +1,8 @@
 extends Node3D
 
+
+@onready var miss_stream_player: AudioStreamPlayer = %MissStreamPlayer
+
 const _ARROW_SCENE: PackedScene = preload("res://src/rhythm_controller/rhythm_arrow.tscn")
 const _TEXT_SCENE: PackedScene = preload("res://src/rhythm_controller/rhythm_text.tscn")
 const HIT_WINDOW_BEATS: float = 0.3 # ±0.5 beats; tune to taste
@@ -62,7 +65,7 @@ func _on_arrow_hit(direction: Vector3, signed_delta: float) -> void:
 
 func _on_arrow_missed(direction: Vector3, signed_delta: float):
 	player.hp_controller(controler_damage)
-
+	miss_stream_player.play()
 	if signed_delta > 0:
 		_show_message(direction, "Late!", [Color.DARK_RED])
 	elif signed_delta < 0:
