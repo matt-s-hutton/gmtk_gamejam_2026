@@ -45,6 +45,7 @@ var input_grading: Dictionary[float, InputGrade] = {
 var all_arrows: Array[RhythmArrow] = []
 
 func _ready() -> void:
+	return
 	Conductor.beat.connect(_on_beat)
 
 func _show_message(direction: Vector3, message: String, color_array: Array[Color]) -> void:
