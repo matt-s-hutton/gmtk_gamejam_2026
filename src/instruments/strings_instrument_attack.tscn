@@ -13,7 +13,7 @@ radius = 0.9
 
 [node name="StringsInstrumentAttack" type="Node3D" unique_id=1986053017]
 script = ExtResource("1_ufjk8")
-debug_logging = true
+catch_threshold_sq = 40.0
 
 [node name="StringsInstrumentAttackSkin" type="Node3D" parent="." unique_id=254434627]
 unique_name_in_owner = true
