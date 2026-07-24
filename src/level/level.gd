@@ -6,12 +6,16 @@ extends Node3D
 
 @export var player: Player
 
+@export var song: Song
+
 @export_enum("bass", "drums", "keys", "lead", "strings")
 var unlocks: Array[String] = []
 
 var _timer := Timer.new()
 
 func _ready() -> void:
+	PlayerDataService.load_song(song)
+
 	for i in spawn_count:
 		EnemyService.request_spawn_enemy()
 	

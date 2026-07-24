@@ -44,6 +44,7 @@ size = Vector2(100, 100)
 [node name="Level" type="Node3D" unique_id=1835709079 node_paths=PackedStringArray("player")]
 script = ExtResource("1_la7um")
 player = NodePath("Player")
+song = ExtResource("3_q0oqu")
 unlocks = Array[String](["drums", "bass"])
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1031514596]
@@ -55,7 +56,6 @@ environment = SubResource("Environment_w7y1s")
 
 [node name="MusicManager" type="Node" parent="." unique_id=1073743599]
 script = ExtResource("2_k5trb")
-current_song = ExtResource("3_q0oqu")
 metadata/_custom_type_script = "uid://dyugjuolk07hl"
 
 [node name="EnemyManager" parent="." unique_id=1342869898 node_paths=PackedStringArray("player", "enemy_grid") instance=ExtResource("2_p6v4a")]
