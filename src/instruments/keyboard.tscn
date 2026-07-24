@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c86g4fbiwitjs"]
+
+[ext_resource type="Script" uid="uid://cgs4nxiaybmwm" path="res://src/instruments/keyboard.gd" id="1_qbfd3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7vdnf"]
+size = Vector3(0.36730957, 0.20458984, 1)
+
+[node name="Keyboard" type="Node3D" unique_id=896325891]
+script = ExtResource("1_qbfd3")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=123602291]
+wait_time = 1.7999999999999998
+autostart = true
+
+[node name="KeyboardSkin" type="Node3D" parent="." unique_id=1130495105]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="KeyboardSkin" unique_id=313909102]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_7vdnf")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

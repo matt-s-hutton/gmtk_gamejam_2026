@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bfh6pividtno8"]
+
+[ext_resource type="Script" uid="uid://vgjokvippibc" path="res://src/instruments/keyboard_attack.gd" id="1_7oj72"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvfn3"]
+transparency = 1
+albedo_color = Color(1, 0.09, 0.059, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7vdnf"]
+material = SubResource("StandardMaterial3D_gvfn3")
+top_radius = 0.7
+bottom_radius = 0.7
+height = 0.001
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7vdnf"]
+radius = 0.34765625
+height = 1.0097656
+
+[node name="KeyboardAttack" type="Node3D" unique_id=2037162278]
+script = ExtResource("1_7oj72")
+
+[node name="WarningMarkerMesh" type="MeshInstance3D" parent="." unique_id=2097261458]
+unique_name_in_owner = true
+mesh = SubResource("CylinderMesh_7vdnf")
+
+[node name="BombMesh" type="MeshInstance3D" parent="." unique_id=1710648834]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_7vdnf")
+
+[node name="DropTimer" type="Timer" parent="." unique_id=1634404279]
+wait_time = 1.2
+autostart = true
+
+[connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]

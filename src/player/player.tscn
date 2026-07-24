@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://clrunh4xhdcah" path="res://src/rhythm_controller/rhythm_controller.tscn" id="2_mf2ua"]
 [ext_resource type="PackedScene" uid="uid://dxmiecia6xxmj" path="res://src/instruments/drums.tscn" id="2_rxibo"]
 [ext_resource type="PackedScene" uid="uid://ygjri5ooge1u" path="res://src/instruments/bass.tscn" id="4_5f2sf"]
+[ext_resource type="PackedScene" uid="uid://c86g4fbiwitjs" path="res://src/instruments/keyboard.tscn" id="5_o822w"]
 [ext_resource type="PackedScene" uid="uid://b7dwt6s6pe4e4" path="res://src/ui/ui.tscn" id="6_jiejy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7vdnf"]
@@ -33,6 +34,10 @@ player = NodePath("../..")
 
 [node name="Bass" parent="PlayerSkin" unique_id=1120892320 node_paths=PackedStringArray("player") instance=ExtResource("4_5f2sf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40526184, 1.1570835, -0.6280775)
+player = NodePath("../..")
+
+[node name="Keyboard" parent="PlayerSkin" unique_id=896325891 node_paths=PackedStringArray("player") instance=ExtResource("5_o822w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68573296, -1.068593)
 player = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422050821]

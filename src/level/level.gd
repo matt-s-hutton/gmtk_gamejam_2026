@@ -18,7 +18,7 @@ func _ready() -> void:
 
 	for i in spawn_count:
 		EnemyService.request_spawn_enemy()
-	
+
 	for insturment in unlocks:
 		PlayerDataService.unlock_instrument(insturment)
 
