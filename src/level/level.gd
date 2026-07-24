@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var spawn_count: int = 5000
+@export var spawn_count: int = 500
 @export var spawn_radius: float = 35.0
 @export var spawn_interval: float = 0.5
 
