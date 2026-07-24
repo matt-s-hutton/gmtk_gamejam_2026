@@ -9,7 +9,7 @@ var instrument_stream_players: Dictionary = {}
 func _ready() -> void:
 	if current_song:
 		# Setup Metronone
-		Conductor.set_song(current_song.metronone, 75, 4)
+		Conductor.set_song(current_song.metronone, 150, 4)
 		Conductor.volume_db = -100
 		Conductor.play()
 
