@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dl3ip73t6k43y"]
+
+[ext_resource type="Script" uid="uid://b4m7051h4pkbu" path="res://src/instruments/strings_instrument.gd" id="1_st1ic"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_gvfn3"]
+size = Vector3(0.625, 0.55, 0.095)
+
+[sub_resource type="PrismMesh" id="PrismMesh_7bdo4"]
+size = Vector3(0.625, 0.55, 0.095)
+
+[node name="StringsInstrument" type="Node3D" unique_id=1678807223]
+script = ExtResource("1_st1ic")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1565913911]
+wait_time = 3.0
+autostart = true
+
+[node name="StringsSkin" type="Node3D" parent="." unique_id=1164011530]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StringsSkin" unique_id=1828010052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0025806427, 0.5491212, 0)
+mesh = SubResource("PrismMesh_gvfn3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StringsSkin" unique_id=1968344078]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PrismMesh_7bdo4")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
