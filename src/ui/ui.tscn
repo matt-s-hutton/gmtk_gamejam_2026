@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cxa4o32j0addi" path="res://src/ui/Victory Fanfare.wav" id="4_8wxmc"]
 
 [node name="UI" type="Control" unique_id=1757368918 node_paths=PackedStringArray("fanfar")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

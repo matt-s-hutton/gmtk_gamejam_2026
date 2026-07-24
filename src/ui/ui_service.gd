@@ -13,6 +13,5 @@ func request_game_over() -> void:
 	game_over.emit()
 	
 func request_game_end() -> void:
-	if GlobalValues.victory == true:
-		game_ended.emit()
-		GlobalValues.victory = false
+	print('Victory same')
+	game_ended.emit()

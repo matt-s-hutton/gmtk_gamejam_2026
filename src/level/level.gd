@@ -37,7 +37,6 @@ func _ready() -> void:
 	
 	PlayerDataService.load_song(song)
 	GlobalValues.score = 0
-	GlobalValues.victory = false
 
 	for i in spawn_count:
 		EnemyService.request_spawn_enemy()
@@ -58,14 +57,10 @@ func _on_conductor_update(
 	if song_finished:
 		return
 
-	if position >= song_length * 2:
+	if position >= song_length * 1.99:
 		print('almost_victory')
-		song_finished = true
-		GlobalValues.victory = true
-		_timer.stop()
 		UiService.request_game_end()
 		
-	
 
 
 func _on_spawn_tick() -> void:
