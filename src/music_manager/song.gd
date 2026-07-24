@@ -47,8 +47,4 @@ func get_next_beat() -> Array[String]:
 	if _valid_beatmap:
 		return _beatmap_data[scrub_position]
 	else:
-		var roll = randf()
-		if roll < 0.45:
-			return [_valid_directions.pick_random()]
-		else:
-			return [_valid_directions.pick_random(), _valid_directions.pick_random()]
+		return [_valid_directions.pick_random()]
