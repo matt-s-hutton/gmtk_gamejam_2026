@@ -21,6 +21,7 @@ stream_2/stream = ExtResource("6_pql7r")
 
 [node name="Enemy" type="Node3D" unique_id=563102616 groups=["enemies"]]
 script = ExtResource("1_6j2al")
+move_speed = 4.0
 separation_strength = 5.0
 separation_update_interval = 8
 

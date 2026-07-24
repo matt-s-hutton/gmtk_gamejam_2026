@@ -3,7 +3,6 @@ class_name Player
 
 @export var max_speed := 8.0
 @export var max_hp := 100
-@export var damage_value := -20
 
 @onready var attack_emission_point: Marker3D = %AttackEmissionPoint
 @onready var player_skin: Node3D = %PlayerSkin
@@ -50,6 +49,7 @@ func _on_hitbox_area_entered(area: Area3D) -> void:
 		return
 	if area is EnemyHurtBox:
 		can_damage = false
+		var damage_value = area.enemy.damage_value
 		hp_controller(damage_value)
 
 		if hp > 0:

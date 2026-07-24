@@ -21,6 +21,11 @@ func _on_spawn_enemy() -> void:
 	add_child(enemy)
 	enemy.tree_exiting.connect(_on_enemy_tree_exiting.bind(enemy))
 	enemy.deactivate()
+	var rand_num:float = randf()
+	if rand_num <= 0.2:
+		enemy.scale *= 2
+		enemy.initial_health *= 2.5
+		enemy.damage_value *= 2
 	_inactive.append(enemy)
 
 
